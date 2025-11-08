@@ -4,6 +4,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { convexQuery } from '@convex-dev/react-query'
 
 import { api } from '../../convex/_generated/api'
+import { Button } from '../components/ui/button'
 
 export const Route = createFileRoute('/anotherPage')({
   component: AnotherPage,
@@ -25,8 +26,7 @@ function AnotherPage() {
         <p>Numbers: {data.numbers.join(', ')}</p>
         <p>Click the button below to add a random number to the database.</p>
         <p>
-          <button
-            className="bg-dark dark:bg-light text-light dark:text-dark text-sm px-4 py-2 rounded-md border-2"
+          <Button
             onClick={() => {
               callMyAction({
                 first: Math.round(Math.random() * 100),
@@ -34,7 +34,7 @@ function AnotherPage() {
             }}
           >
             Call action to add a random number
-          </button>
+          </Button>
         </p>
         <Link to="/" className="text-purple-600 underline hover:no-underline">
           Back

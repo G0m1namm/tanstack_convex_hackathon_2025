@@ -1,9 +1,15 @@
-import { useNavigate } from '@tanstack/react-router'
+import { useNavigate, useParams } from '@tanstack/react-router'
 import { useEffect, useState, useCallback } from 'react'
 import { useAction, useMutation } from 'convex/react'
 import { useLingui } from '@lingui/react'
+import { Trans } from '@lingui/react'
 
 import { api } from '../../convex/_generated/api'
+import { Progress } from './ui/progress'
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+import { Alert, AlertDescription, AlertTitle } from './ui/alert'
+import { Button } from './ui/button'
+import { Spinner } from './ui/spinner'
 
 type ErrorType = 'timeout' | 'network' | 'invalid_url' | 'rate_limit' | 'extraction_failed' | 'unknown'
 
@@ -21,6 +27,7 @@ interface SearchPageProps {
 
 export function SearchPage({ url, searchId }: SearchPageProps) {
   const navigate = useNavigate()
+  const params = useParams({ strict: false })
   const { t } = useLingui()
   const [status, setStatus] = useState<'extracting' | 'searching' | 'completed' | 'error' | 'timeout_warning'>('extracting')
   const [progress, setProgress] = useState(0)
@@ -180,12 +187,12 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
 
   useEffect(() => {
     if (!url) {
-      navigate({ to: '/$lang' })
+      navigate({ to: '/$lang', params: { lang: params.lang || 'en' } })
       return
     }
 
     startSearchProcess()
-  }, [url])
+  }, [url, params.lang])
 
   const startSearchProcess = useCallback(async () => {
     try {
@@ -220,7 +227,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
       setTimeout(() => {
         navigate({
           to: '/$lang/compare/$comparisonId',
-          params: { comparisonId },
+          params: { lang: params.lang || 'en', comparisonId },
         })
       }, 1000)
 
@@ -305,45 +312,46 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
   if (status === 'error') {
     const errorConfig = getErrorConfig(errorType)
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
-          <div className="text-6xl mb-4">{errorConfig.icon}</div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">{errorConfig.title}</h2>
-          <p className="text-gray-600 mb-4">{errorConfig.description}</p>
-          <p className="text-sm text-gray-500 mb-6">{error}</p>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <Card className="max-w-md w-full text-center">
+          <CardHeader>
+            <div className="text-6xl mb-4">{errorConfig.icon}</div>
+            <CardTitle className="text-2xl">{errorConfig.title}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-muted-foreground">{errorConfig.description}</p>
+            <Alert variant="destructive">
+              <AlertTitle>Error Details</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
 
-          <div className="space-y-3">
-            {errorConfig.canRetry && (
-              <button
-                onClick={retrySearch}
-                className="w-full bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
-              >
-<Trans id="search.tryAgain" />
-              </button>
-            )}
-            {errorConfig.showDifferentUrl && (
-              <button
-                onClick={() => navigate({ to: '/$lang' })}
-                className={`w-full px-6 py-3 rounded-lg transition-colors ${
-                  errorConfig.canRetry
-                    ? 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-                    : 'bg-black text-white hover:bg-gray-800'
-                }`}
-              >
-<Trans id="search.tryDifferentUrl" />
-              </button>
-            )}
-          </div>
-
-          {/* Retry attempts info */}
-          {retryState.attempt > 1 && (
-            <div className="mt-4 p-3 bg-gray-50 rounded-lg">
-              <p className="text-sm text-gray-600">
-<Trans id="search.attemptsInfo" values={{ attempt: retryState.attempt, maxRetries: retryState.maxRetries }} />
-              </p>
+            <div className="space-y-3">
+              {errorConfig.canRetry && (
+                <Button onClick={retrySearch} className="w-full">
+                  <Trans id="search.tryAgain" />
+                </Button>
+              )}
+              {errorConfig.showDifferentUrl && (
+                <Button
+                  onClick={() => navigate({ to: '/$lang', params: { lang: params.lang || 'en' } })}
+                  variant={errorConfig.canRetry ? "secondary" : "default"}
+                  className="w-full"
+                >
+                  <Trans id="search.tryDifferentUrl" />
+                </Button>
+              )}
             </div>
-          )}
-        </div>
+
+            {/* Retry attempts info */}
+            {retryState.attempt > 1 && (
+              <Alert>
+                <AlertDescription>
+                  <Trans id="search.attemptsInfo" values={{ attempt: retryState.attempt, maxRetries: retryState.maxRetries }} />
+                </AlertDescription>
+              </Alert>
+            )}
+          </CardContent>
+        </Card>
       </div>
     )
   }
@@ -366,19 +374,14 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
 
             {/* Progress Bar */}
             <div className="mb-8">
-              <div className="w-full bg-gray-200 rounded-full h-3">
-                <div
-                  className="bg-black h-3 rounded-full transition-all duration-500 ease-out"
-                  style={{ width: `${progress}%` }}
-                ></div>
-              </div>
+              <Progress value={progress} className="h-3" />
               <p className="text-center text-sm text-gray-500 mt-2">{progress}% complete</p>
             </div>
 
             {/* Steps */}
             <div className="space-y-6">
               <div className="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 border border-gray-200">
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black"></div>
+                <Spinner className="h-6 w-6" />
                 <div className="flex-1">
                   <p className="font-medium" style={{ color: 'color(display-p3 0.14902 0.14902 0.14902)' }}>
                     Extracting product details (Attempt {retryState.attempt}/{retryState.maxRetries})
@@ -399,18 +402,19 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
               The website is slow to respond. Would you like to wait or try a different approach?
             </p>
             <div className="space-y-2">
-              <button
+              <Button
                 onClick={() => setStatus('extracting')} // Continue waiting
-                className="w-full bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors text-sm"
+                className="w-full bg-yellow-600 hover:bg-yellow-700 text-white"
               >
                 Keep Waiting
-              </button>
-              <button
-                onClick={() => navigate({ to: '/$lang' })}
-                className="w-full bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors text-sm"
+              </Button>
+              <Button
+                onClick={() => navigate({ to: '/$lang', params: { lang: params.lang || 'en' } })}
+                variant="secondary"
+                className="w-full"
               >
                 Try Different URL
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -431,12 +435,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
 
         {/* Progress Bar */}
         <div className="mb-8">
-          <div className="w-full bg-gray-200 rounded-full h-3">
-            <div
-              className="bg-black h-3 rounded-full transition-all duration-500 ease-out"
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
+          <Progress value={progress} className="h-3" />
           <p className="text-center text-sm text-gray-500 mt-2">{progress}% complete</p>
         </div>
 
@@ -497,7 +496,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
                   )}
                 </div>
                 {isCurrent && (
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black"></div>
+                  <Spinner className="h-6 w-6" />
                 )}
               </div>
             )
@@ -516,12 +515,13 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
 
         {/* Back Button */}
         <div className="mt-6 text-center">
-          <button
-            onClick={() => navigate({ to: '/$lang' })}
-            className="text-gray-500 hover:text-gray-700 text-sm"
+          <Button
+            onClick={() => navigate({ to: '/$lang', params: { lang: params.lang || 'en' } })}
+            variant="link"
+            className="text-gray-500 hover:text-gray-700"
           >
             ← Back to search
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -4,6 +4,9 @@ import { convexQuery } from '@convex-dev/react-query'
 import { Trans } from '@lingui/react'
 
 import { api } from '../../convex/_generated/api'
+import { Button } from './ui/button'
+import { Card, CardContent } from './ui/card'
+import { Badge } from './ui/badge'
 
 interface ComparisonPageProps {
   comparisonId: string
@@ -73,17 +76,16 @@ export function ComparisonPage({ comparisonId }: ComparisonPageProps) {
                 )}
               </p>
             </div>
-            <button
+            <Button
               onClick={() =>
                 navigate({
                   to: '/$lang',
                   params: { lang: params.lang || 'en' },
                 })
               }
-              className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
             >
               <Trans id="comparison.newSearch" />
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -97,27 +99,27 @@ export function ComparisonPage({ comparisonId }: ComparisonPageProps) {
             const savingsPercent = ((savings / product.price) * 100).toFixed(1)
 
             return (
-              <div
+              <Card
                 key={product._id}
-                className={`bg-white rounded-lg shadow-md overflow-hidden border-2 ${
+                className={`${
                   product.price === lowestPrice && !isOriginal
                     ? 'border-green-500'
-                    : 'border-gray-200'
+                    : ''
                 }`}
               >
-                <div className="p-6">
+                <CardContent className="p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         {product.price === lowestPrice && !isOriginal && (
-                          <span className="bg-green-100 text-green-800 text-sm font-medium px-2 py-1 rounded">
+                          <Badge variant="secondary" className="bg-green-100 text-green-800 hover:bg-green-100">
                             <Trans id="comparison.lowestPrice" />
-                          </span>
+                          </Badge>
                         )}
                         {isOriginal && (
-                          <span className="bg-gray-100 text-gray-800 text-sm font-medium px-2 py-1 rounded">
+                          <Badge variant="secondary">
                             <Trans id="comparison.original" />
-                          </span>
+                          </Badge>
                         )}
                         <h3 className="text-lg font-semibold text-gray-900">
                           {product.name}
@@ -162,41 +164,43 @@ export function ComparisonPage({ comparisonId }: ComparisonPageProps) {
                     </div>
 
                     <div className="ml-4">
-                      <a
-                        href={product.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 inline-flex items-center gap-2"
-                      >
-                        <Trans id="comparison.visitStore" />
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
+                      <Button asChild>
+                        <a
+                          href={product.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          />
-                        </svg>
-                      </a>
+                          <Trans id="comparison.visitStore" />
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </a>
+                      </Button>
                     </div>
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             )
           })}
         </div>
 
         {/* Summary */}
         {hasAlternatives && (
-          <div className="mt-8 bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              <Trans id="comparison.summary" />
-            </h3>
+          <Card className="mt-8">
+            <CardContent className="p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <Trans id="comparison.summary" />
+              </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center">
                 <div className="text-2xl font-bold text-gray-900">
@@ -226,7 +230,8 @@ export function ComparisonPage({ comparisonId }: ComparisonPageProps) {
                 </div>
               </div>
             </div>
-          </div>
+            </CardContent>
+          </Card>
         )}
       </div>
     </div>
