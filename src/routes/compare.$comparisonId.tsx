@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { convexQuery } from '@convex-dev/react-query'
+
 import { api } from '../../convex/_generated/api'
 
 export const Route = createFileRoute('/compare/$comparisonId')({
@@ -29,7 +30,8 @@ function ComparisonPage() {
   }
 
   const { originalProduct, products } = comparison
-  const allProducts = [originalProduct, ...products].filter(Boolean)
+  const allProducts = [originalProduct, ...products].filter((p): p is NonNullable<typeof p> => p != null)
+  const hasAlternatives = products.length > 0
 
   // Sort by price (lowest first)
   const sortedProducts = allProducts.sort((a, b) => a.price - b.price)
@@ -44,7 +46,10 @@ function ComparisonPage() {
             <div>
               <h1 className="text-2xl font-bold text-gray-900">Price Comparison</h1>
               <p className="text-gray-600 mt-1">
-                Found {sortedProducts.length} options for "{originalProduct.name}"
+                {hasAlternatives
+                  ? `Found ${sortedProducts.length} options for "${originalProduct?.name || 'this product'}"`
+                  : `No cheaper alternatives found for "${originalProduct?.name || 'this product'}"`
+                }
               </p>
             </div>
             <button
@@ -60,8 +65,8 @@ function ComparisonPage() {
       {/* Results */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid gap-6">
-          {sortedProducts.map((product, index) => {
-            const isOriginal = product._id === originalProduct._id
+          {sortedProducts.map((product) => {
+            const isOriginal = product._id === originalProduct?._id
             const savings = product.price - lowestPrice
             const savingsPercent = ((savings / product.price) * 100).toFixed(1)
 
@@ -148,10 +153,39 @@ function ComparisonPage() {
           })}
         </div>
 
+        {/* No alternatives message */}
+        {!hasAlternatives && (
+          <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <div className="flex items-start">
+              <div className="text-2xl mr-4">💡</div>
+              <div>
+                <h3 className="text-lg font-medium text-blue-900 mb-2">No Cheaper Alternatives Found</h3>
+                <p className="text-blue-800 mb-3">
+                  We searched Amazon, eBay, Walmart, Best Buy, and Target, but couldn't find this product
+                  cheaper than the original price. This could mean:
+                </p>
+                <ul className="text-blue-800 text-sm space-y-1">
+                  <li>• This product may have a competitive price already</li>
+                  <li>• The product might be temporarily out of stock on other platforms</li>
+                  <li>• The search terms might not perfectly match across platforms</li>
+                </ul>
+                <div className="mt-4">
+                  <button
+                    onClick={() => window.location.href = '/'}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium"
+                  >
+                    Try Another Product
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Summary */}
         <div className="mt-8 bg-white rounded-lg shadow-md p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Summary</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className={`grid gap-4 ${hasAlternatives ? 'grid-cols-1 md:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'}`}>
             <div className="text-center">
               <div className="text-2xl font-bold text-gray-900">{sortedProducts.length}</div>
               <div className="text-sm text-gray-600">Products Found</div>
@@ -160,12 +194,14 @@ function ComparisonPage() {
               <div className="text-2xl font-bold text-green-600">${lowestPrice.toFixed(2)}</div>
               <div className="text-sm text-gray-600">Lowest Price</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">
-                ${(sortedProducts[0]?.price - lowestPrice).toFixed(2)}
+            {hasAlternatives && (
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-600">
+                  ${(sortedProducts[0]?.price ? (sortedProducts[0].price - lowestPrice).toFixed(2) : '0.00')}
+                </div>
+                <div className="text-sm text-gray-600">Potential Savings</div>
               </div>
-              <div className="text-sm text-gray-600">Potential Savings</div>
-            </div>
+            )}
           </div>
         </div>
       </div>

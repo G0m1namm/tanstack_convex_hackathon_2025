@@ -9,6 +9,7 @@
  */
 
 import type * as autumn from "../autumn.js";
+import type * as firecrawlActions from "../firecrawlActions.js";
 import type * as myFunctions from "../myFunctions.js";
 import type * as search from "../search.js";
 
@@ -28,6 +29,7 @@ import type {
  */
 declare const fullApi: ApiFromModules<{
   autumn: typeof autumn;
+  firecrawlActions: typeof firecrawlActions;
   myFunctions: typeof myFunctions;
   search: typeof search;
 }>;

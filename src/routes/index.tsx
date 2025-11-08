@@ -1,19 +1,21 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useMutation } from 'convex/react'
+
 import { api } from '../../convex/_generated/api'
+import { LANDING_PAGE_TEST_IDS } from '@/constants/constants'
 
 export const Route = createFileRoute('/')({
   component: LandingPage,
 })
 
-function LandingPage() {
+export function LandingPage() {
   const [url, setUrl] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
   // We'll create this mutation later
-  const createSearch = useMutation(api.searches.createSearch)
+  const createSearch = useMutation(api.search.createSearch)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -67,7 +69,7 @@ function LandingPage() {
       {/* Hero Section */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6" data-testid={LANDING_PAGE_TEST_IDS.MAIN_HEADING}>
             Find Cheaper Alternatives
             <span className="block text-indigo-600">Instantly</span>
           </h1>
@@ -87,12 +89,14 @@ function LandingPage() {
                   placeholder="Paste product URL here (e.g., https://amazon.com/...)"
                   className="w-full px-6 py-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   disabled={isLoading}
+                  data-testid={LANDING_PAGE_TEST_IDS.PRODUCT_URL_INPUT}
                 />
               </div>
               <button
                 type="submit"
                 disabled={isLoading || !url.trim()}
                 className="px-8 py-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                data-testid={LANDING_PAGE_TEST_IDS.FIND_DEALS_BUTTON}
               >
                 {isLoading ? (
                   <>
@@ -109,7 +113,7 @@ function LandingPage() {
           </div>
 
           {/* Supported Platforms */}
-          <div className="mb-16">
+          <div className="mb-16" data-testid={LANDING_PAGE_TEST_IDS.SUPPORTED_PLATFORMS}>
             <p className="text-sm text-gray-500 mb-4">Supported platforms:</p>
             <div className="flex flex-wrap justify-center gap-3">
               {supportedPlatforms.map((platform) => (
@@ -126,7 +130,7 @@ function LandingPage() {
         </div>
 
         {/* How it Works Section */}
-        <section id="how-it-works" className="py-16">
+        <section id="how-it-works" className="py-16" data-testid={LANDING_PAGE_TEST_IDS.HOW_IT_WORKS_SECTION}>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">How It Works</h2>
             <p className="text-lg text-gray-600">Three simple steps to save money</p>
@@ -172,16 +176,18 @@ function LandingPage() {
             <p className="text-gray-600 mb-6">
               Test with a sample product URL to see how it works
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
+            <div className="flex flex-wrap justify-center gap-4 text-sm" data-testid={LANDING_PAGE_TEST_IDS.SAMPLE_BUTTONS_CONTAINER}>
               <button
                 onClick={() => setUrl('https://www.amazon.com/dp/B08N5WRWNW')}
                 className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+                data-testid={LANDING_PAGE_TEST_IDS.SAMPLE_IPHONE_BUTTON}
               >
                 📱 Sample iPhone
               </button>
               <button
                 onClick={() => setUrl('https://www.walmart.com/ip/example-product')}
                 className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+                data-testid={LANDING_PAGE_TEST_IDS.SAMPLE_HOME_ITEM_BUTTON}
               >
                 🏠 Sample Home Item
               </button>
