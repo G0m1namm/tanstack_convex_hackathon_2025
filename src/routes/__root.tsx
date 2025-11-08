@@ -9,6 +9,7 @@ import * as Sentry from '@sentry/react'
 import type { QueryClient } from '@tanstack/react-query'
 import { I18nProvider } from '@lingui/react'
 import { i18n } from '~/i18n'
+import { Navigation } from '~/components/Navigation'
 import appCss from '~/styles/app.css?url'
 
 Sentry.init({
@@ -64,6 +65,7 @@ function RootComponent() {
   return (
     <RootDocument>
       <I18nProvider i18n={i18n}>
+        <Navigation />
         <Outlet />
       </I18nProvider>
     </RootDocument>

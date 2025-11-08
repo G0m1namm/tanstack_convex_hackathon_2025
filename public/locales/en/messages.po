@@ -151,72 +151,85 @@ msgstr "Built for the TanStack Start Hackathon • Powered by Convex, Firecrawl,
 #~ msgid "common.yes"
 #~ msgstr "Yes"
 
-#~ msgid "comparison.condition"
-#~ msgstr "Condition: {condition}"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:27
+msgid "comparison.notFound.title"
+msgstr "Comparison Not Found"
 
-#~ msgid "comparison.foundOptions"
-#~ msgstr "Found {count} options for \"{productName}\""
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:30
+msgid "comparison.notFound.description"
+msgstr "The comparison you're looking for doesn't exist."
 
-#~ msgid "comparison.freeShipping"
-#~ msgstr "Free Shipping"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:55
+msgid "comparison.title"
+msgstr "Price Comparison"
 
-#~ msgid "comparison.inStock"
-#~ msgstr "In Stock"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:60
+msgid "comparison.foundOptions"
+msgstr "Found {count} options for \"{productName}\""
 
-#~ msgid "comparison.lowestPrice"
-#~ msgstr "🏆 Lowest Price"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:68
+msgid "comparison.noAlternatives"
+msgstr "No cheaper alternatives found for \"{productName}\""
 
-#~ msgid "comparison.lowestPriceLabel"
-#~ msgstr "Lowest Price"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:85
+msgid "comparison.newSearch"
+msgstr "New Search"
 
-#~ msgid "comparison.newSearch"
-#~ msgstr "New Search"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:114
+msgid "comparison.lowestPrice"
+msgstr "Lowest Price"
 
-#~ msgid "comparison.noAlternatives"
-#~ msgstr "No cheaper alternatives found for \"{productName}\""
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:119
+msgid "comparison.original"
+msgstr "Original"
 
-#~ msgid "comparison.notFound.description"
-#~ msgstr "The comparison you're looking for doesn't exist."
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:137
+msgid "comparison.savings"
+msgstr "Save ${amount} ({percent}%)"
 
-#~ msgid "comparison.notFound.title"
-#~ msgstr "Comparison Not Found"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:149
+msgid "comparison.inStock"
+msgstr "In Stock"
 
-#~ msgid "comparison.original"
-#~ msgstr "Original"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:153
+msgid "comparison.outOfStock"
+msgstr "Out of Stock"
 
-#~ msgid "comparison.outOfStock"
-#~ msgstr "Out of Stock"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:171
+msgid "comparison.visitStore"
+msgstr "Visit Store"
 
-#~ msgid "comparison.potentialSavings"
-#~ msgstr "Potential Savings"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:198
+msgid "comparison.summary"
+msgstr "Summary"
 
-#~ msgid "comparison.productsFound"
-#~ msgstr "Products Found"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:206
+msgid "comparison.productsFound"
+msgstr "Products Found"
 
-#~ msgid "comparison.rating"
-#~ msgstr "Rating: {rating}/5"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:214
+msgid "comparison.lowestPrice"
+msgstr "Lowest Price"
 
-#~ msgid "comparison.reviews"
-#~ msgstr "{count} reviews"
-
-#~ msgid "comparison.savings"
-#~ msgstr "Save ${amount} ({percent}%)"
-
-#~ msgid "comparison.seller"
-#~ msgstr "Seller: {seller}"
-
-#~ msgid "comparison.shipping"
-#~ msgstr "Shipping: ${amount}"
-
-#~ msgid "comparison.summary"
-#~ msgstr "Summary"
-
-# Comparison page
-#~ msgid "comparison.title"
-#~ msgstr "Price Comparison"
-
-#~ msgid "comparison.visitStore"
-#~ msgstr "Visit Store"
+#. js-lingui-explicit-id
+#: src/components/ComparisonPage.tsx:225
+msgid "comparison.potentialSavings"
+msgstr "Potential Savings"
 
 #~ msgid "landing.beta"
 #~ msgstr "Beta"

@@ -5,7 +5,6 @@ import { Trans } from '@lingui/react'
 
 import { api } from '../../convex/_generated/api'
 import { LANDING_PAGE_TEST_IDS } from '@/constants/constants'
-import { Navigation } from './Navigation'
 import { HeroSection } from './HeroSection'
 import { PartnersSection } from './PartnersSection'
 import { Section } from './Section'
@@ -52,9 +51,6 @@ export function LandingPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
-      <Navigation />
-
       {/* Hero Section */}
       <HeroSection
         title={<Trans id="landing.mainHeading" />}
