@@ -1,0 +1,405 @@
+# Spanish translations for DealFinder
+msgid ""
+msgstr ""
+"Language: es\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:56
+msgid "landing.title"
+msgstr "DealFinder"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:57
+msgid "landing.beta"
+msgstr "Beta"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:60
+msgid "nav.howItWorks"
+msgstr "Cómo funciona"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:61
+msgid "nav.pricing"
+msgstr "Precios"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:71
+msgid "landing.mainHeading"
+msgstr "Encuentra Alternativas Más Baratas"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:72
+msgid "landing.mainHeadingAccent"
+msgstr "Instantáneamente"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:75
+msgid "landing.subtitle"
+msgstr "Pega cualquier URL de producto y descubre mejores ofertas en Amazon, eBay, Walmart y más. Ahorra dinero en Black Friday y todos los días."
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:86
+msgid "landing.urlPlaceholder"
+msgstr "Pega la URL del producto aquí (ej. https://amazon.com/...)"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:101
+msgid "landing.searching"
+msgstr "Buscando..."
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:105
+msgid "landing.findDeals"
+msgstr "Buscar Ofertas"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:114
+msgid "landing.supportedPlatforms"
+msgstr "Plataformas compatibles:"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:132
+msgid "landing.howItWorks.title"
+msgstr "Cómo Funciona"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:133
+msgid "landing.howItWorks.subtitle"
+msgstr "Tres pasos simples para ahorrar dinero"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:141
+msgid "landing.howItWorks.step1.title"
+msgstr "1. Pegar URL"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:143
+msgid "landing.howItWorks.step1.description"
+msgstr "Copia cualquier URL de producto de tu tienda favorita y pégala aquí."
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:151
+msgid "landing.howItWorks.step2.title"
+msgstr "2. Extracción con IA"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:153
+msgid "landing.howItWorks.step2.description"
+msgstr "Nuestra IA analiza el producto y busca artículos idénticos en todas las plataformas."
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:161
+msgid "landing.howItWorks.step3.title"
+msgstr "3. Comparar y Ahorrar"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:163
+msgid "landing.howItWorks.step3.description"
+msgstr "Ve todas las opciones disponibles ordenadas por precio, con enlaces directos para comprar."
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:172
+msgid "landing.demo.title"
+msgstr "Pruébalo Ahora"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:174
+msgid "landing.demo.description"
+msgstr "Prueba con una URL de producto de muestra para ver cómo funciona"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:182
+msgid "landing.demo.sampleIphone"
+msgstr "📱 iPhone de Muestra"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:189
+msgid "landing.demo.sampleHomeItem"
+msgstr "🏠 Artículo de Hogar de Muestra"
+
+#. js-lingui-explicit-id
+#: src/components/LandingPage.tsx:200
+msgid "landing.footer"
+msgstr "Creado para el Hackathon de TanStack Start • Desarrollado con Convex, Firecrawl y más"
+
+#~ msgid "common.cancel"
+#~ msgstr "Cancelar"
+
+#~ msgid "common.error"
+#~ msgstr "Error"
+
+# Common
+#~ msgid "common.loading"
+#~ msgstr "Cargando..."
+
+#~ msgid "common.no"
+#~ msgstr "No"
+
+#~ msgid "common.retry"
+#~ msgstr "Reintentar"
+
+#~ msgid "common.yes"
+#~ msgstr "Sí"
+
+#~ msgid "comparison.condition"
+#~ msgstr "Condición: {condition}"
+
+#~ msgid "comparison.foundOptions"
+#~ msgstr "Encontradas {count} opciones para \"{productName}\""
+
+#~ msgid "comparison.freeShipping"
+#~ msgstr "Envío Gratis"
+
+#~ msgid "comparison.inStock"
+#~ msgstr "En Stock"
+
+#~ msgid "comparison.lowestPrice"
+#~ msgstr "🏆 Precio Más Bajo"
+
+#~ msgid "comparison.lowestPriceLabel"
+#~ msgstr "Precio Más Bajo"
+
+#~ msgid "comparison.newSearch"
+#~ msgstr "Nueva Búsqueda"
+
+#~ msgid "comparison.noAlternatives"
+#~ msgstr "No se encontraron alternativas más baratas para \"{productName}\""
+
+#~ msgid "comparison.notFound.description"
+#~ msgstr "La comparación que buscas no existe."
+
+#~ msgid "comparison.notFound.title"
+#~ msgstr "Comparación No Encontrada"
+
+#~ msgid "comparison.original"
+#~ msgstr "Original"
+
+#~ msgid "comparison.outOfStock"
+#~ msgstr "Agotado"
+
+#~ msgid "comparison.potentialSavings"
+#~ msgstr "Ahorro Potencial"
+
+#~ msgid "comparison.productsFound"
+#~ msgstr "Productos Encontrados"
+
+#~ msgid "comparison.rating"
+#~ msgstr "Calificación: {rating}/5"
+
+#~ msgid "comparison.reviews"
+#~ msgstr "{count} reseñas"
+
+#~ msgid "comparison.savings"
+#~ msgstr "Ahorra ${amount} ({percent}%)"
+
+#~ msgid "comparison.seller"
+#~ msgstr "Vendedor: {seller}"
+
+#~ msgid "comparison.shipping"
+#~ msgstr "Envío: ${amount}"
+
+#~ msgid "comparison.summary"
+#~ msgstr "Resumen"
+
+# Comparison page
+#~ msgid "comparison.title"
+#~ msgstr "Comparación de Precios"
+
+#~ msgid "comparison.visitStore"
+#~ msgstr "Visitar Tienda"
+
+#~ msgid "landing.beta"
+#~ msgstr "Beta"
+
+#~ msgid "landing.demo.description"
+#~ msgstr "Prueba con una URL de producto de ejemplo para ver cómo funciona"
+
+#~ msgid "landing.demo.sampleHomeItem"
+#~ msgstr "🏠 Artículo de Hogar de Ejemplo"
+
+#~ msgid "landing.demo.sampleIphone"
+#~ msgstr "📱 iPhone de Ejemplo"
+
+#~ msgid "landing.demo.title"
+#~ msgstr "Pruébalo Ahora"
+
+#~ msgid "landing.findDeals"
+#~ msgstr "Buscar Ofertas"
+
+#~ msgid "landing.footer"
+#~ msgstr "Construido para el Hackathon TanStack Start • Desarrollado con Convex, Firecrawl y más"
+
+#~ msgid "landing.howItWorks.step1.description"
+#~ msgstr "Copia cualquier URL de producto de tu tienda favorita y pégala aquí."
+
+#~ msgid "landing.howItWorks.step1.title"
+#~ msgstr "1. Pegar URL"
+
+#~ msgid "landing.howItWorks.step2.description"
+#~ msgstr "Nuestra IA analiza el producto y busca artículos idénticos en múltiples plataformas."
+
+#~ msgid "landing.howItWorks.step2.title"
+#~ msgstr "2. Extracción con IA"
+
+#~ msgid "landing.howItWorks.step3.description"
+#~ msgstr "Ve todas las opciones disponibles ordenadas por precio, con enlaces directos para comprar."
+
+#~ msgid "landing.howItWorks.step3.title"
+#~ msgstr "3. Comparar y Ahorrar"
+
+#~ msgid "landing.howItWorks.subtitle"
+#~ msgstr "Tres pasos simples para ahorrar dinero"
+
+#~ msgid "landing.howItWorks.title"
+#~ msgstr "Cómo Funciona"
+
+#~ msgid "landing.mainHeading"
+#~ msgstr "Encuentra Alternativas Más Baratas"
+
+#~ msgid "landing.mainHeadingAccent"
+#~ msgstr "Al Instante"
+
+#~ msgid "landing.searching"
+#~ msgstr "Buscando..."
+
+#~ msgid "landing.subtitle"
+#~ msgstr "Pega cualquier URL de producto y descubre mejores ofertas en Amazon, eBay, Walmart, y más. Ahorra dinero en Black Friday y todos los días."
+
+#~ msgid "landing.supportedPlatforms"
+#~ msgstr "Plataformas compatibles:"
+
+# Landing page
+#~ msgid "landing.title"
+#~ msgstr "DealFinder"
+
+#~ msgid "landing.urlPlaceholder"
+#~ msgstr "Pega la URL del producto aquí (ej. https://amazon.com/...)"
+
+# Navigation
+#~ msgid "nav.howItWorks"
+#~ msgstr "Cómo funciona"
+
+#~ msgid "nav.pricing"
+#~ msgstr "Precios"
+
+#~ msgid "search.analyzing"
+#~ msgstr "Analizando"
+
+#~ msgid "search.analyzingWithAI"
+#~ msgstr "Usando IA para analizar el producto..."
+
+#~ msgid "search.attemptsInfo"
+#~ msgstr "Intentado {attempt} de {maxRetries} veces"
+
+#~ msgid "search.backToSearch"
+#~ msgstr "← Volver a buscar"
+
+#~ msgid "search.completedSuccessfully"
+#~ msgstr "Completado exitosamente"
+
+#~ msgid "search.errors.extractionFailed.description"
+#~ msgstr "Esta página podría no ser una página de producto o tener un formato inusual."
+
+#~ msgid "search.errors.extractionFailed.title"
+#~ msgstr "No se Puede Analizar la Página"
+
+#~ msgid "search.errors.invalidUrl.description"
+#~ msgstr "La URL proporcionada parece ser inválida o no está soportada."
+
+#~ msgid "search.errors.invalidUrl.title"
+#~ msgstr "URL Inválida"
+
+#~ msgid "search.errors.network.description"
+#~ msgstr "No se puede conectar al sitio web. Por favor verifica tu conexión a internet."
+
+#~ msgid "search.errors.network.title"
+#~ msgstr "Problema de Conexión"
+
+#~ msgid "search.errors.rateLimit.description"
+#~ msgstr "Estamos recibiendo demasiadas solicitudes. Por favor espera un momento antes de intentar nuevamente."
+
+#~ msgid "search.errors.rateLimit.title"
+#~ msgstr "Demasiadas Solicitudes"
+
+#~ msgid "search.errors.timeout.description"
+#~ msgstr "El sitio web responde lentamente. Esto a veces sucede durante horas pico."
+
+#~ msgid "search.errors.timeout.title"
+#~ msgstr "Tomando Más Tiempo de lo Esperado"
+
+#~ msgid "search.errors.unknown.description"
+#~ msgstr "Algo inesperado sucedió. Por favor intenta nuevamente."
+
+#~ msgid "search.errors.unknown.title"
+#~ msgstr "Búsqueda Fallida"
+
+#~ msgid "search.extractingAttempt"
+#~ msgstr "Extrayendo detalles del producto (Intento {attempt}/{maxRetries})"
+
+# Search page
+#~ msgid "search.findingDeals"
+#~ msgstr "Buscando Mejores Ofertas"
+
+#~ msgid "search.progress"
+#~ msgstr "completo"
+
+#~ msgid "search.retrying"
+#~ msgstr "El intento anterior falló, reintentando en {count}s..."
+
+#~ msgid "search.retryingExtraction"
+#~ msgstr "Reintentando extracción (intento {attempt})..."
+
+#~ msgid "search.searchingPlatforms"
+#~ msgstr "Buscando en múltiples plataformas..."
+
+#~ msgid "search.steps.completed"
+#~ msgstr "Comparación lista"
+
+#~ msgid "search.steps.extracting"
+#~ msgstr "Extrayendo detalles del producto"
+
+#~ msgid "search.steps.searching"
+#~ msgstr "Buscando alternativas"
+
+#~ msgid "search.takingLonger"
+#~ msgstr "Esto está tomando más tiempo de lo usual..."
+
+#~ msgid "search.timeoutWarning.description"
+#~ msgstr "El sitio web responde lentamente. ¿Te gustaría esperar o probar un enfoque diferente?"
+
+#~ msgid "search.timeoutWarning.keepWaiting"
+#~ msgstr "Seguir Esperando"
+
+#~ msgid "search.timeoutWarning.title"
+#~ msgstr "Tomando Más Tiempo de lo Esperado"
+
+#~ msgid "search.timeoutWarning.tryDifferentUrl"
+#~ msgstr "Probar URL Diferente"
+
+#~ msgid "search.tips.platforms"
+#~ msgstr "Buscamos en Amazon, eBay, Walmart, Best Buy y Target"
+
+#~ msgid "search.tips.sorted"
+#~ msgstr "Los resultados se ordenan por precio más bajo primero"
+
+#~ msgid "search.tips.title"
+#~ msgstr "💡 Consejos Pro"
+
+#~ msgid "search.tips.visit"
+#~ msgstr "Haz clic en \"Visitar Tienda\" para comprar directamente"
+
+#~ msgid "search.tryAgain"
+#~ msgstr "🔄 Intentar de Nuevo"
+
+#~ msgid "search.tryDifferentUrl"
+#~ msgstr "🔗 Probar URL Diferente"

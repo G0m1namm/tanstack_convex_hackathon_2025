@@ -11,8 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as AnotherPageRouteImport } from './routes/anotherPage'
+import { Route as LangRouteImport } from './routes/$lang'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LangIndexRouteImport } from './routes/$lang.index'
 import { Route as CompareComparisonIdRouteImport } from './routes/compare.$comparisonId'
+import { Route as LangSearchRouteImport } from './routes/$lang.search'
+import { Route as LangCompareComparisonIdRouteImport } from './routes/$lang.compare.$comparisonId'
 
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
@@ -24,46 +28,102 @@ const AnotherPageRoute = AnotherPageRouteImport.update({
   path: '/anotherPage',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LangRoute = LangRouteImport.update({
+  id: '/$lang',
+  path: '/$lang',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const LangIndexRoute = LangIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LangRoute,
 } as any)
 const CompareComparisonIdRoute = CompareComparisonIdRouteImport.update({
   id: '/compare/$comparisonId',
   path: '/compare/$comparisonId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LangSearchRoute = LangSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangCompareComparisonIdRoute = LangCompareComparisonIdRouteImport.update({
+  id: '/compare/$comparisonId',
+  path: '/compare/$comparisonId',
+  getParentRoute: () => LangRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$lang': typeof LangRouteWithChildren
   '/anotherPage': typeof AnotherPageRoute
   '/search': typeof SearchRoute
+  '/$lang/search': typeof LangSearchRoute
   '/compare/$comparisonId': typeof CompareComparisonIdRoute
+  '/$lang/': typeof LangIndexRoute
+  '/$lang/compare/$comparisonId': typeof LangCompareComparisonIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/anotherPage': typeof AnotherPageRoute
   '/search': typeof SearchRoute
+  '/$lang/search': typeof LangSearchRoute
   '/compare/$comparisonId': typeof CompareComparisonIdRoute
+  '/$lang': typeof LangIndexRoute
+  '/$lang/compare/$comparisonId': typeof LangCompareComparisonIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$lang': typeof LangRouteWithChildren
   '/anotherPage': typeof AnotherPageRoute
   '/search': typeof SearchRoute
+  '/$lang/search': typeof LangSearchRoute
   '/compare/$comparisonId': typeof CompareComparisonIdRoute
+  '/$lang/': typeof LangIndexRoute
+  '/$lang/compare/$comparisonId': typeof LangCompareComparisonIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/anotherPage' | '/search' | '/compare/$comparisonId'
+  fullPaths:
+    | '/'
+    | '/$lang'
+    | '/anotherPage'
+    | '/search'
+    | '/$lang/search'
+    | '/compare/$comparisonId'
+    | '/$lang/'
+    | '/$lang/compare/$comparisonId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/anotherPage' | '/search' | '/compare/$comparisonId'
-  id: '__root__' | '/' | '/anotherPage' | '/search' | '/compare/$comparisonId'
+  to:
+    | '/'
+    | '/anotherPage'
+    | '/search'
+    | '/$lang/search'
+    | '/compare/$comparisonId'
+    | '/$lang'
+    | '/$lang/compare/$comparisonId'
+  id:
+    | '__root__'
+    | '/'
+    | '/$lang'
+    | '/anotherPage'
+    | '/search'
+    | '/$lang/search'
+    | '/compare/$comparisonId'
+    | '/$lang/'
+    | '/$lang/compare/$comparisonId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LangRoute: typeof LangRouteWithChildren
   AnotherPageRoute: typeof AnotherPageRoute
   SearchRoute: typeof SearchRoute
   CompareComparisonIdRoute: typeof CompareComparisonIdRoute
@@ -85,12 +145,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnotherPageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$lang': {
+      id: '/$lang'
+      path: '/$lang'
+      fullPath: '/$lang'
+      preLoaderRoute: typeof LangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/$lang/': {
+      id: '/$lang/'
+      path: '/'
+      fullPath: '/$lang/'
+      preLoaderRoute: typeof LangIndexRouteImport
+      parentRoute: typeof LangRoute
     }
     '/compare/$comparisonId': {
       id: '/compare/$comparisonId'
@@ -99,11 +173,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompareComparisonIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$lang/search': {
+      id: '/$lang/search'
+      path: '/search'
+      fullPath: '/$lang/search'
+      preLoaderRoute: typeof LangSearchRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/compare/$comparisonId': {
+      id: '/$lang/compare/$comparisonId'
+      path: '/compare/$comparisonId'
+      fullPath: '/$lang/compare/$comparisonId'
+      preLoaderRoute: typeof LangCompareComparisonIdRouteImport
+      parentRoute: typeof LangRoute
+    }
   }
 }
 
+interface LangRouteChildren {
+  LangSearchRoute: typeof LangSearchRoute
+  LangIndexRoute: typeof LangIndexRoute
+  LangCompareComparisonIdRoute: typeof LangCompareComparisonIdRoute
+}
+
+const LangRouteChildren: LangRouteChildren = {
+  LangSearchRoute: LangSearchRoute,
+  LangIndexRoute: LangIndexRoute,
+  LangCompareComparisonIdRoute: LangCompareComparisonIdRoute,
+}
+
+const LangRouteWithChildren = LangRoute._addFileChildren(LangRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LangRoute: LangRouteWithChildren,
   AnotherPageRoute: AnotherPageRoute,
   SearchRoute: SearchRoute,
   CompareComparisonIdRoute: CompareComparisonIdRoute,

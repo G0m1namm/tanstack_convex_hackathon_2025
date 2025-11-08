@@ -7,6 +7,8 @@ import {
 import * as React from 'react'
 import * as Sentry from '@sentry/react'
 import type { QueryClient } from '@tanstack/react-query'
+import { I18nProvider } from '@lingui/react'
+import { i18n } from '~/i18n'
 import appCss from '~/styles/app.css?url'
 
 Sentry.init({
@@ -28,7 +30,7 @@ export const Route = createRootRouteWithContext<{
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'DealFinder - Find Cheaper Alternatives Instantly',
       },
     ],
     links: [
@@ -61,7 +63,9 @@ export const Route = createRootRouteWithContext<{
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <I18nProvider i18n={i18n}>
+        <Outlet />
+      </I18nProvider>
     </RootDocument>
   )
 }
