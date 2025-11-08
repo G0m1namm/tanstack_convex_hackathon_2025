@@ -5,8 +5,15 @@ import {
   createRootRouteWithContext,
 } from '@tanstack/react-router'
 import * as React from 'react'
+import * as Sentry from '@sentry/react'
 import type { QueryClient } from '@tanstack/react-query'
 import appCss from '~/styles/app.css?url'
+
+Sentry.init({
+  dsn: 'https://b1763bf55cffcc9c4b1876adafee316d@o4510321965596672.ingest.us.sentry.io/4510321967628288',
+  sendDefaultPii: true,
+  enabled: import.meta.env.MODE === 'production',
+})
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient

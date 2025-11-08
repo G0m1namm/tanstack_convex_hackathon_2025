@@ -8,7 +8,9 @@
  * @module
  */
 
+import type * as autumn from "../autumn.js";
 import type * as myFunctions from "../myFunctions.js";
+import type * as search from "../search.js";
 
 import type {
   ApiFromModules,
@@ -25,7 +27,9 @@ import type {
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  autumn: typeof autumn;
   myFunctions: typeof myFunctions;
+  search: typeof search;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
 
@@ -38,4 +42,6 @@ export declare const internal: FilterApi<
   FunctionReference<any, "internal">
 >;
 
-export declare const components: {};
+export declare const components: {
+  autumn: {};
+};

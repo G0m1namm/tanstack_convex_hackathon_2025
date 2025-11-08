@@ -1,0 +1,181 @@
+# DealFinder - Cursor Rules for AI Assistant
+
+## Project Context
+You are working on **DealFinder**, an AI-powered price comparison platform that finds cheaper alternatives to products across e-commerce platforms. This is a TanStack Start hackathon project using Convex backend.
+
+## Tech Stack Rules
+
+### React/TypeScript
+- **Strict TypeScript**: No `any` types, use proper type definitions
+- **Modern React**: Use hooks, functional components, no class components
+- **Component Naming**: PascalCase for components, camelCase for instances
+- **File Extensions**: `.tsx` for components, `.ts` for utilities
+
+### TanStack Router
+- **File-based Routing**: Routes defined in `src/routes/` directory
+- **Route Naming**: Use descriptive names like `compare.$comparisonId.tsx`
+- **Loader Functions**: Use `createFileRoute().loader()` for data fetching
+- **Search Params**: Use `useSearch()` for URL parameters
+
+### Convex Backend
+- **Schema First**: Define tables in `convex/schema.ts` before implementing functions
+- **Function Naming**: camelCase, descriptive names (e.g., `createProductSearch`)
+- **Type Generation**: Run `npx convex dev` to generate types after schema changes
+- **Real-time**: Use subscriptions for live data updates
+
+### Code Style
+- **Imports**: Group by external libraries, then internal modules, separated by blank lines
+- **Error Handling**: Use try/catch with meaningful error messages
+- **Async/Await**: Prefer async/await over Promises
+- **Destructuring**: Use object/array destructuring when appropriate
+- **Performance**: Use explicit file extensions in imports to reduce resolve operations
+- **Type Safety**: Define proper TypeScript interfaces for all data structures
+
+## Domain-Specific Rules
+
+### Product Comparison Logic
+- **URL Validation**: Always validate e-commerce URLs before processing
+- **Product Matching**: Consider brand, model, specifications for similarity
+- **Price Handling**: Handle different currencies, discounts, and shipping costs
+- **Availability**: Check stock status and delivery times
+
+### AI Integration
+- **Autumn**: Use for subscription management and feature gating
+- **Firecrawl**: Use for web scraping with proper error handling
+- **Rate Limiting**: Respect API limits and implement backoff strategies
+
+### User Experience
+- **Loading States**: Show spinners/loaders for all async operations
+- **Error Boundaries**: Implement error boundaries for critical components
+- **Responsive Design**: Ensure mobile-first approach with Tailwind CSS
+- **Accessibility**: Add proper ARIA labels and keyboard navigation
+
+## Development Workflow
+
+### File Creation
+1. **Components**: Create in appropriate directories under `src/`
+2. **Backend Functions**: Create in `convex/` directory
+3. **Routes**: Create in `src/routes/` following TanStack Router conventions
+4. **Utilities**: Create in `src/` with descriptive names
+
+### Testing Approach
+1. **Manual Testing**: Test in browser with Convex dev server running
+2. **API Testing**: Use Convex dashboard to test functions directly
+3. **UI Testing**: Test responsive design across different screen sizes
+4. **Error Scenarios**: Test with invalid URLs, network failures, etc.
+
+### Common Patterns
+- **Data Fetching**: Use `useSuspenseQuery` from `@tanstack/react-query`
+- **Mutations**: Use `useMutation` with proper error handling
+- **Navigation**: Use `useNavigate()` from TanStack Router
+- **Forms**: Use controlled components with proper validation
+
+## Code Quality Checks
+
+### Before Committing
+- [ ] Run `pnpm lint` - fix all ESLint errors
+- [ ] Run TypeScript check - no type errors
+- [ ] Test functionality manually
+- [ ] Check responsive design
+- [ ] Verify Convex functions work
+
+### Performance Considerations
+- **Bundle Size**: Minimize imports, use dynamic imports for large components
+- **Database Queries**: Optimize Convex queries, use indexes appropriately
+- **Images**: Optimize images and use appropriate formats
+- **Caching**: Leverage Convex's built-in caching
+- **Build Optimization**: Use Vite's warmup feature for frequently used files
+- **Asset Optimization**: Use appropriate image formats and compression
+
+## React 19 Best Practices for DealFinder
+
+### Server Actions Implementation
+- Use Server Actions for URL validation and product extraction workflows
+- Implement optimistic updates with useOptimistic for search result previews
+- Use improved error boundaries for handling search and scraping failures
+- Leverage Suspense boundaries for better loading experiences
+
+### Component Architecture
+- Use Server Components for static product comparison layouts and pricing displays
+- Reserve Client Components for interactive elements like search forms and filters
+- Combine Server Components with Convex for optimal data fetching performance
+- Use React Compiler to minimize manual optimization work
+
+## AI Assistant Guidelines
+
+### When Writing Code
+- **Read Existing Code**: Understand patterns before making changes
+- **Follow Conventions**: Match existing code style and structure
+- **Add Comments**: Comment complex business logic
+- **Test Changes**: Verify functionality works as expected
+
+### When Debugging
+- **Check Logs**: Use `npx convex logs` for backend issues
+- **Browser Tools**: Use React DevTools and Network tab
+- **Type Errors**: Fix TypeScript errors before testing
+- **Console Errors**: Address all console warnings/errors
+
+### When Adding Features
+- **Start Small**: Implement minimal viable functionality first
+- **Database First**: Define schema changes before frontend work
+- **User Feedback**: Add loading states and error handling
+- **Documentation**: Update this file if new patterns are established
+
+## Technology Best Practices
+
+### React 19 Implementation
+- Leverage React Compiler for automatic optimization - minimize manual memoization
+- Use 'use server' directives for Server Components and 'use client' for client-side code
+- Implement Server Actions for form handling and data mutations
+- Utilize new hooks: useOptimistic, useFormStatus, useFormState for enhanced UX
+- Use functional components with modern hooks (useState, useEffect, useMemo, useCallback)
+- Implement improved error boundaries with React 19's enhanced error handling
+- Use Suspense boundaries strategically for better loading states
+- Leverage startTransition and useDeferredValue for concurrent features
+- Use React 19's new resource loading patterns for better performance
+- Prefer composition over inheritance patterns
+- Use proper TypeScript interfaces with strict typing for all props and state
+
+### TanStack Router Usage
+- Use file-based routing with descriptive names
+- Implement loaders for data fetching at route level
+- Use search params for filter/query state
+- Handle navigation with useNavigate hook
+- Keep route components focused and lightweight
+
+### Convex Database Operations
+- Define schema first, then implement functions
+- Use appropriate indexes for query performance
+- Implement proper error handling for mutations
+- Use subscriptions judiciously for real-time updates
+- Run `npx convex dev` after schema changes
+
+### Autumn Integration
+- Use `useCustomer()` hook for customer state
+- Implement `allowed()` checks for feature gating
+- Call `track()` after successful operations
+- Handle billing failures gracefully
+- Keep pricing logic centralized in dashboard
+
+### Firecrawl Web Scraping
+- Validate URLs before scraping
+- Implement retry logic with exponential backoff
+- Handle rate limits appropriately
+- Sanitize scraped data before storage
+- Cache successful results to reduce API calls
+
+### Tailwind CSS Styling
+- Use utility-first approach
+- Implement responsive design with breakpoint prefixes
+- Extract reusable component patterns
+- Avoid excessive nesting and custom CSS
+- Use dark mode with Tailwind's built-in support
+
+### Vite Build Optimization
+- Use explicit file extensions to reduce resolve operations
+- Implement code splitting with dynamic imports
+- Configure warmup for frequently used files
+- Optimize plugins for performance
+- Use appropriate asset handling
+
+Remember: This is a hackathon project. Focus on delivering working features quickly while maintaining code quality. Speed and innovation are important, but so is maintainable code.
