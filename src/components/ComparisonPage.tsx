@@ -52,7 +52,7 @@ export function ComparisonPage({ comparisonId }: ComparisonPageProps) {
             </div>
             <button
               onClick={() => navigate({ to: '/$lang' })}
-              className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
+              className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
             >
               {t('comparison.newSearch')}
             </button>
@@ -137,7 +137,7 @@ export function ComparisonPage({ comparisonId }: ComparisonPageProps) {
                         href={product.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 inline-flex items-center gap-2"
+                        className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 inline-flex items-center gap-2"
                       >
                         {t('comparison.visitStore')}
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -166,7 +166,7 @@ export function ComparisonPage({ comparisonId }: ComparisonPageProps) {
                 <div className="text-sm text-gray-600">{t('comparison.lowestPriceLabel')}</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-indigo-600">
+                <div className="text-2xl font-bold" style={{ color: 'color(display-p3 0.14902 0.14902 0.14902)' }}>
                   ${((originalProduct?.price || 0) - lowestPrice).toFixed(2)}
                 </div>
                 <div className="text-sm text-gray-600">{t('comparison.potentialSavings')}</div>

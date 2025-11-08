@@ -316,7 +316,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
             {errorConfig.canRetry && (
               <button
                 onClick={retrySearch}
-                className="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors"
+                className="w-full bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
               >
 <Trans id="search.tryAgain" />
               </button>
@@ -327,7 +327,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
                 className={`w-full px-6 py-3 rounded-lg transition-colors ${
                   errorConfig.canRetry
                     ? 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-                    : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                    : 'bg-black text-white hover:bg-gray-800'
                 }`}
               >
 <Trans id="search.tryDifferentUrl" />
@@ -351,7 +351,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
   // Timeout warning overlay
   if (status === 'timeout_warning') {
     return (
-      <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 flex items-center justify-center relative">
+      <div className="min-h-screen flex items-center justify-center relative" style={{ backgroundColor: 'color(display-p3 0.976471 0.976471 0.976471)' }}>
         {/* Main content (slightly dimmed) */}
         <div className="opacity-50">
           {/* Include the main search UI here */}
@@ -360,7 +360,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-gray-900 mb-4">Finding Better Deals</h1>
               <p className="text-gray-600">
-                Analyzing <span className="font-medium text-indigo-600">{url}</span>
+                Analyzing <span className="font-medium" style={{ color: 'color(display-p3 0.14902 0.14902 0.14902)' }}>{url}</span>
               </p>
             </div>
 
@@ -368,7 +368,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
             <div className="mb-8">
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
-                  className="bg-indigo-600 h-3 rounded-full transition-all duration-500 ease-out"
+                  className="bg-black h-3 rounded-full transition-all duration-500 ease-out"
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
@@ -377,10 +377,10 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
 
             {/* Steps */}
             <div className="space-y-6">
-              <div className="flex items-center space-x-4 p-4 rounded-lg bg-indigo-50 border border-indigo-200">
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600"></div>
+              <div className="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 border border-gray-200">
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black"></div>
                 <div className="flex-1">
-                  <p className="font-medium text-indigo-800">
+                  <p className="font-medium" style={{ color: 'color(display-p3 0.14902 0.14902 0.14902)' }}>
                     Extracting product details (Attempt {retryState.attempt}/{retryState.maxRetries})
                   </p>
                   <p className="text-sm text-gray-500 mt-1">This is taking longer than usual...</p>
@@ -419,13 +419,13 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'color(display-p3 0.976471 0.976471 0.976471)' }}>
       <div className="max-w-2xl w-full bg-white rounded-lg shadow-xl p-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Finding Better Deals</h1>
           <p className="text-gray-600">
-            Analyzing <span className="font-medium text-indigo-600">{url}</span>
+            Analyzing <span className="font-medium" style={{ color: 'color(display-p3 0.14902 0.14902 0.14902)' }}>{url}</span>
           </p>
         </div>
 
@@ -433,7 +433,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
         <div className="mb-8">
           <div className="w-full bg-gray-200 rounded-full h-3">
             <div
-              className="bg-indigo-600 h-3 rounded-full transition-all duration-500 ease-out"
+              className="bg-black h-3 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
@@ -454,7 +454,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
                   isCompleted
                     ? 'bg-green-50 border border-green-200'
                     : isCurrent
-                    ? 'bg-indigo-50 border border-indigo-200'
+                    ? 'bg-gray-50 border border-gray-200'
                     : 'bg-gray-50 border border-gray-200'
                 }`}
               >
@@ -466,7 +466,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
                     isCompleted
                       ? 'text-green-800'
                       : isCurrent
-                      ? 'text-indigo-800'
+                      ? 'text-black'
                       : 'text-gray-600'
                   }`}>
                     {step.label}
@@ -497,7 +497,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
                   )}
                 </div>
                 {isCurrent && (
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600"></div>
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black"></div>
                 )}
               </div>
             )
@@ -505,9 +505,9 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
         </div>
 
         {/* Tips */}
-        <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-          <h3 className="font-medium text-blue-900 mb-2">💡 Pro Tips</h3>
-          <ul className="text-sm text-blue-800 space-y-1">
+        <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+          <h3 className="font-medium mb-2" style={{ color: 'color(display-p3 0.14902 0.14902 0.14902)' }}>💡 Pro Tips</h3>
+          <ul className="text-sm text-gray-700 space-y-1">
             <li>• We search Amazon, eBay, Walmart, Best Buy, and Target</li>
             <li>• Results are sorted by lowest price first</li>
             <li>• Click "Visit Store" to purchase directly</li>

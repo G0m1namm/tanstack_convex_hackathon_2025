@@ -1,9 +1,20 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   html,
   body {
-    @apply text-gray-900 bg-gray-50 dark:bg-gray-950 dark:text-gray-200;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: color(display-p3 0.976471 0.976471 0.976471);
+    color: color(display-p3 0.14902 0.14902 0.14902);
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Modern typography system like Firecrawl */
+  .hero-heading {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
   }
 
   .using-mouse * {

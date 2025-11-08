@@ -36,7 +36,7 @@ function AnotherPage() {
             Call action to add a random number
           </button>
         </p>
-        <Link to="/" className="text-blue-600 underline hover:no-underline">
+        <Link to="/" className="text-purple-600 underline hover:no-underline">
           Back
         </Link>
       </div>
