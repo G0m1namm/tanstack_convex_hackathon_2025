@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from '@tanstack/react-router'
 import { useEffect, useState, useCallback } from 'react'
 import { useAction, useMutation } from 'convex/react'
-import { useLingui } from '@lingui/react'
 import { Trans } from '@lingui/react'
+import { AlertCircle, CheckCircle2, Clock, Zap, Search } from 'lucide-react'
 
 import { api } from '../../convex/_generated/api'
 import { Progress } from './ui/progress'
@@ -28,8 +28,9 @@ interface SearchPageProps {
 export function SearchPage({ url, searchId }: SearchPageProps) {
   const navigate = useNavigate()
   const params = useParams({ strict: false })
-  const { t } = useLingui()
-  const [status, setStatus] = useState<'extracting' | 'searching' | 'completed' | 'error' | 'timeout_warning'>('extracting')
+  const [status, setStatus] = useState<
+    'extracting' | 'searching' | 'completed' | 'error' | 'timeout_warning'
+  >('extracting')
   const [progress, setProgress] = useState(0)
   const [error, setError] = useState<string>('')
   const [errorType, setErrorType] = useState<ErrorType>('unknown')
@@ -37,7 +38,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
     attempt: 1,
     maxRetries: 3,
     isRetrying: false,
-    nextRetryIn: 0
+    nextRetryIn: 0,
   })
   const [timeoutWarningShown, setTimeoutWarningShown] = useState(false)
   const [retryCountdown, setRetryCountdown] = useState(0)
@@ -56,19 +57,34 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
 
     const message = error.message.toLowerCase()
 
-    if (message.includes('timeout') || message.includes('etimedout') || message.includes('scrape timed out')) {
+    if (
+      message.includes('timeout') ||
+      message.includes('etimedout') ||
+      message.includes('scrape timed out')
+    ) {
       return 'timeout'
     }
-    if (message.includes('network') || message.includes('connection') || message.includes('econnrefused')) {
+    if (
+      message.includes('network') ||
+      message.includes('connection') ||
+      message.includes('econnrefused')
+    ) {
       return 'network'
     }
     if (message.includes('invalid url') || message.includes('malformed')) {
       return 'invalid_url'
     }
-    if (message.includes('rate limit') || message.includes('too many requests')) {
+    if (
+      message.includes('rate limit') ||
+      message.includes('too many requests')
+    ) {
       return 'rate_limit'
     }
-    if (message.includes('no data') || message.includes('failed to extract') || message.includes('unable to analyze')) {
+    if (
+      message.includes('no data') ||
+      message.includes('failed to extract') ||
+      message.includes('unable to analyze')
+    ) {
       return 'extraction_failed'
     }
 
@@ -88,7 +104,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
       let timeoutWarningId: NodeJS.Timeout | undefined
 
       try {
-        setRetryState(prev => ({ ...prev, attempt, isRetrying: false }))
+        setRetryState((prev) => ({ ...prev, attempt, isRetrying: false }))
 
         // Set a timeout warning after 30 seconds
         const timeoutPromise = new Promise<never>((_resolve, _reject) => {
@@ -103,7 +119,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
 
         const extractionPromise = extractProductFromUrl({
           url,
-          searchId: searchId ? searchId as any : undefined,
+          searchId: searchId ? (searchId as any) : undefined,
         })
 
         const result = await Promise.race([extractionPromise, timeoutPromise])
@@ -111,7 +127,6 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
         if (timeoutWarningId) clearTimeout(timeoutWarningId)
         setTimeoutWarningShown(false)
         return result
-
       } catch (err) {
         if (timeoutWarningId) clearTimeout(timeoutWarningId)
         lastError = err instanceof Error ? err : new Error(String(err))
@@ -130,20 +145,30 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
         }
 
         // Show retry state
-        setRetryState(prev => ({
+        setRetryState((prev) => ({
           ...prev,
           attempt: attempt + 1,
           isRetrying: true,
-          nextRetryIn: getRetryDelay(attempt + 1) / 1000
+          nextRetryIn: getRetryDelay(attempt + 1) / 1000,
         }))
 
         // Wait before retrying
-        await new Promise(resolve => setTimeout(resolve, getRetryDelay(attempt)))
+        await new Promise((resolve) =>
+          setTimeout(resolve, getRetryDelay(attempt)),
+        )
       }
     }
 
     throw lastError!
-  }, [url, searchId, retryState.maxRetries, extractProductFromUrl, classifyError, getRetryDelay, timeoutWarningShown])
+  }, [
+    url,
+    searchId,
+    retryState.maxRetries,
+    extractProductFromUrl,
+    classifyError,
+    getRetryDelay,
+    timeoutWarningShown,
+  ])
 
   // Manual retry function
   const retrySearch = useCallback(() => {
@@ -151,7 +176,7 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
     setProgress(0)
     setError('')
     setErrorType('unknown')
-    setRetryState(prev => ({ ...prev, attempt: 1, isRetrying: false }))
+    setRetryState((prev) => ({ ...prev, attempt: 1, isRetrying: false }))
     setTimeoutWarningShown(false)
     setRetryCountdown(0)
     startSearchProcess()
@@ -163,9 +188,9 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
 
     if (retryState.isRetrying && retryCountdown > 0) {
       interval = setInterval(() => {
-        setRetryCountdown(prev => {
+        setRetryCountdown((prev) => {
           if (prev <= 1) {
-            setRetryState(prevState => ({ ...prevState, isRetrying: false }))
+            setRetryState((prevState) => ({ ...prevState, isRetrying: false }))
             return 0
           }
           return prev - 1
@@ -230,14 +255,19 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
           params: { lang: params.lang || 'en', comparisonId },
         })
       }, 1000)
-
     } catch (err) {
       console.error('Search process failed:', err)
       setStatus('error')
       setError(err instanceof Error ? err.message : 'Something went wrong')
       setErrorType(classifyError(err))
     }
-  }, [extractWithRetry, createComparison, searchSimilarProducts, navigate, classifyError])
+  }, [
+    extractWithRetry,
+    createComparison,
+    searchSimilarProducts,
+    navigate,
+    classifyError,
+  ])
 
   const steps = [
     { key: 'extracting', label: 'Extracting product details', icon: '🔍' },
@@ -248,10 +278,14 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
   const getCurrentStepIndex = () => {
     switch (status) {
       case 'extracting':
-      case 'timeout_warning': return 0
-      case 'searching': return 1
-      case 'completed': return 2
-      default: return 0
+      case 'timeout_warning':
+        return 0
+      case 'searching':
+        return 1
+      case 'completed':
+        return 2
+      default:
+        return 0
     }
   }
 
@@ -260,81 +294,106 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
     switch (errorType) {
       case 'timeout':
         return {
-          icon: '⏰',
-          title: t({ id: 'search.errors.timeout.title', message: 'Taking Longer Than Expected' }),
-          description: t({ id: 'search.errors.timeout.description', message: 'The website is slow to respond. This sometimes happens during peak hours.' }),
+          icon: Clock,
+          title: 'Taking Longer Than Expected',
+          description:
+            'The website is slow to respond. This sometimes happens during peak hours.',
           canRetry: true,
-          showDifferentUrl: true
+          showDifferentUrl: true,
         }
       case 'network':
         return {
-          icon: '🌐',
-          title: t({ id: 'search.errors.network.title', message: 'Connection Issue' }),
-          description: t({ id: 'search.errors.network.description', message: 'Unable to connect to the website. Please check your internet connection.' }),
+          icon: AlertCircle,
+          title: 'Connection Issue',
+          description:
+            'Unable to connect to the website. Please check your internet connection.',
           canRetry: true,
-          showDifferentUrl: true
+          showDifferentUrl: true,
         }
       case 'invalid_url':
         return {
-          icon: '❌',
-          title: t({ id: 'search.errors.invalidUrl.title', message: 'Invalid URL' }),
-          description: t({ id: 'search.errors.invalidUrl.description', message: 'The provided URL appears to be invalid or not supported.' }),
+          icon: AlertCircle,
+          title: 'Invalid URL',
+          description:
+            'The provided URL appears to be invalid or not supported.',
           canRetry: false,
-          showDifferentUrl: true
+          showDifferentUrl: true,
         }
       case 'rate_limit':
         return {
-          icon: '🐌',
-          title: t({ id: 'search.errors.rateLimit.title', message: 'Too Many Requests' }),
-          description: t({ id: 'search.errors.rateLimit.description', message: 'We\'re receiving too many requests. Please wait a moment before trying again.' }),
+          icon: Clock,
+          title: 'Too Many Requests',
+          description:
+            "We're receiving too many requests. Please wait a moment before trying again.",
           canRetry: true,
-          showDifferentUrl: false
+          showDifferentUrl: false,
         }
       case 'extraction_failed':
         return {
-          icon: '🔍',
-          title: t({ id: 'search.errors.extractionFailed.title', message: 'Unable to Analyze Page' }),
-          description: t({ id: 'search.errors.extractionFailed.description', message: 'This page might not be a product page or may have an unusual format.' }),
+          icon: Search,
+          title: 'Unable to Analyze Page',
+          description:
+            'This page might not be a product page or may have an unusual format.',
           canRetry: false,
-          showDifferentUrl: true
+          showDifferentUrl: true,
         }
       default:
         return {
-          icon: '❌',
-          title: t({ id: 'search.errors.unknown.title', message: 'Search Failed' }),
-          description: t({ id: 'search.errors.unknown.description', message: 'Something unexpected happened. Please try again.' }),
+          icon: AlertCircle,
+          title: 'Search Failed',
+          description: 'Something unexpected happened. Please try again.',
           canRetry: true,
-          showDifferentUrl: true
+          showDifferentUrl: true,
         }
     }
   }
 
   if (status === 'error') {
     const errorConfig = getErrorConfig(errorType)
+    const IconComponent = errorConfig.icon
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <Card className="max-w-md w-full text-center">
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="max-w-md w-full text-center border-border shadow-lg">
           <CardHeader>
-            <div className="text-6xl mb-4">{errorConfig.icon}</div>
-            <CardTitle className="text-2xl">{errorConfig.title}</CardTitle>
+            <div className="flex justify-center mb-4">
+              <IconComponent
+                className="w-16 h-16 text-primary"
+                strokeWidth={1.5}
+              />
+            </div>
+            <CardTitle className="text-2xl text-foreground">
+              {errorConfig.title}
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-muted-foreground">{errorConfig.description}</p>
-            <Alert variant="destructive">
+            <Alert
+              variant="destructive"
+              className="bg-rose-50 border-rose-300 text-rose-900"
+            >
+              <AlertCircle className="h-4 w-4" />
               <AlertTitle>Error Details</AlertTitle>
-              <AlertDescription>{error}</AlertDescription>
+              <AlertDescription className="text-rose-700">{error}</AlertDescription>
             </Alert>
 
             <div className="space-y-3">
               {errorConfig.canRetry && (
-                <Button onClick={retrySearch} className="w-full">
+                <Button
+                  onClick={retrySearch}
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                >
                   <Trans id="search.tryAgain" />
                 </Button>
               )}
               {errorConfig.showDifferentUrl && (
                 <Button
-                  onClick={() => navigate({ to: '/$lang', params: { lang: params.lang || 'en' } })}
-                  variant={errorConfig.canRetry ? "secondary" : "default"}
+                  onClick={() =>
+                    navigate({
+                      to: '/$lang',
+                      params: { lang: params.lang || 'en' },
+                    })
+                  }
+                  variant={errorConfig.canRetry ? 'secondary' : 'default'}
                   className="w-full"
                 >
                   <Trans id="search.tryDifferentUrl" />
@@ -344,9 +403,15 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
 
             {/* Retry attempts info */}
             {retryState.attempt > 1 && (
-              <Alert>
-                <AlertDescription>
-                  <Trans id="search.attemptsInfo" values={{ attempt: retryState.attempt, maxRetries: retryState.maxRetries }} />
+              <Alert className="bg-secondary border-border">
+                <AlertDescription className="text-muted-foreground">
+                  <Trans
+                    id="search.attemptsInfo"
+                    values={{
+                      attempt: retryState.attempt,
+                      maxRetries: retryState.maxRetries,
+                    }}
+                  />
                 </AlertDescription>
               </Alert>
             )}
@@ -359,34 +424,42 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
   // Timeout warning overlay
   if (status === 'timeout_warning') {
     return (
-      <div className="min-h-screen flex items-center justify-center relative" style={{ backgroundColor: 'color(display-p3 0.976471 0.976471 0.976471)' }}>
+      <div className="min-h-screen flex items-center justify-center relative bg-background">
         {/* Main content (slightly dimmed) */}
-        <div className="opacity-50">
+        <div className="opacity-40">
           {/* Include the main search UI here */}
-          <div className="max-w-2xl w-full bg-white rounded-lg shadow-xl p-8">
+          <div className="max-w-2xl w-full bg-card rounded-lg shadow-xl p-8 border border-border/50">
             {/* Header */}
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">Finding Better Deals</h1>
-              <p className="text-gray-600">
-                Analyzing <span className="font-medium" style={{ color: 'color(display-p3 0.14902 0.14902 0.14902)' }}>{url}</span>
+              <h1 className="text-3xl font-bold text-foreground mb-4">
+                Finding Better Deals
+              </h1>
+              <p className="text-muted-foreground">
+                Analyzing{' '}
+                <span className="font-medium text-foreground">{url}</span>
               </p>
             </div>
 
             {/* Progress Bar */}
             <div className="mb-8">
               <Progress value={progress} className="h-3" />
-              <p className="text-center text-sm text-gray-500 mt-2">{progress}% complete</p>
+              <p className="text-center text-sm text-muted-foreground mt-2">
+                {progress}% complete
+              </p>
             </div>
 
             {/* Steps */}
             <div className="space-y-6">
-              <div className="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 border border-gray-200">
+              <div className="flex items-center space-x-4 p-4 rounded-lg bg-secondary/30 border border-border/50">
                 <Spinner className="h-6 w-6" />
                 <div className="flex-1">
-                  <p className="font-medium" style={{ color: 'color(display-p3 0.14902 0.14902 0.14902)' }}>
-                    Extracting product details (Attempt {retryState.attempt}/{retryState.maxRetries})
+                  <p className="font-medium text-foreground">
+                    Extracting product details (Attempt {retryState.attempt}/
+                    {retryState.maxRetries})
                   </p>
-                  <p className="text-sm text-gray-500 mt-1">This is taking longer than usual...</p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    This is taking longer than usual...
+                  </p>
                 </div>
               </div>
             </div>
@@ -395,48 +468,67 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
 
         {/* Warning overlay */}
         <div className="absolute inset-0 flex items-center justify-center p-4">
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg shadow-lg p-6 max-w-sm w-full text-center">
-            <div className="text-4xl mb-3">⏰</div>
-            <h3 className="text-lg font-semibold text-yellow-800 mb-2">Taking Longer Than Expected</h3>
-            <p className="text-sm text-yellow-700 mb-4">
-              The website is slow to respond. Would you like to wait or try a different approach?
-            </p>
-            <div className="space-y-2">
-              <Button
-                onClick={() => setStatus('extracting')} // Continue waiting
-                className="w-full bg-yellow-600 hover:bg-yellow-700 text-white"
-              >
-                Keep Waiting
-              </Button>
-              <Button
-                onClick={() => navigate({ to: '/$lang', params: { lang: params.lang || 'en' } })}
-                variant="secondary"
-                className="w-full"
-              >
-                Try Different URL
-              </Button>
-            </div>
-          </div>
+          <Card className="border-amber-300 bg-white shadow-xl p-6 max-w-sm w-full text-center">
+            <CardContent className="pt-0">
+              <div className="flex justify-center mb-3">
+                <Clock
+                  className="w-10 h-10 text-amber-600"
+                  strokeWidth={1.5}
+                />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">
+                Taking Longer Than Expected
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                The website is slow to respond. Would you like to wait or try a
+                different approach?
+              </p>
+              <div className="space-y-2">
+                <Button
+                  onClick={() => setStatus('extracting')}
+                  className="w-full bg-amber-600 hover:bg-amber-700 text-white"
+                >
+                  Keep Waiting
+                </Button>
+                <Button
+                  onClick={() =>
+                    navigate({
+                      to: '/$lang',
+                      params: { lang: params.lang || 'en' },
+                    })
+                  }
+                  variant="secondary"
+                  className="w-full"
+                >
+                  Try Different URL
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'color(display-p3 0.976471 0.976471 0.976471)' }}>
-      <div className="max-w-2xl w-full bg-white rounded-lg shadow-xl p-8">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+      <div className="max-w-2xl w-full bg-card rounded-lg shadow-xl p-8 border border-border">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Finding Better Deals</h1>
-          <p className="text-gray-600">
-            Analyzing <span className="font-medium" style={{ color: 'color(display-p3 0.14902 0.14902 0.14902)' }}>{url}</span>
+          <h1 className="text-3xl font-bold text-foreground mb-4">
+            Finding Better Deals
+          </h1>
+          <p className="text-muted-foreground">
+            Analyzing <span className="font-medium text-foreground">{url}</span>
           </p>
         </div>
 
         {/* Progress Bar */}
         <div className="mb-8">
           <Progress value={progress} className="h-3" />
-          <p className="text-center text-sm text-gray-500 mt-2">{progress}% complete</p>
+          <p className="text-center text-sm text-muted-foreground mt-2">
+            {progress}% complete
+          </p>
         </div>
 
         {/* Steps */}
@@ -449,64 +541,91 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
             return (
               <div
                 key={step.key}
-                className={`flex items-center space-x-4 p-4 rounded-lg transition-all ${
+                className={`flex items-center space-x-4 p-4 rounded-lg transition-all border ${
                   isCompleted
-                    ? 'bg-green-50 border border-green-200'
+                    ? 'bg-emerald-50 border-emerald-300'
                     : isCurrent
-                    ? 'bg-gray-50 border border-gray-200'
-                    : 'bg-gray-50 border border-gray-200'
+                      ? 'bg-indigo-50 border-indigo-200'
+                      : 'bg-secondary border-border'
                 }`}
               >
-                <div className={`text-2xl ${isCompleted ? 'animate-bounce' : ''}`}>
-                  {isCompleted ? '✅' : isCurrent ? step.icon : '⏳'}
+                <div
+                  className={`shrink-0 ${isCompleted ? 'animate-bounce' : ''}`}
+                >
+                  {isCompleted ? (
+                    <CheckCircle2
+                      className="w-6 h-6 text-emerald-600"
+                      strokeWidth={1.5}
+                    />
+                  ) : isCurrent ? (
+                    <Zap className="w-6 h-6 text-primary" strokeWidth={1.5} />
+                  ) : (
+                    <Clock
+                      className="w-6 h-6 text-muted-foreground"
+                      strokeWidth={1.5}
+                    />
+                  )}
                 </div>
                 <div className="flex-1">
-                  <p className={`font-medium ${
-                    isCompleted
-                      ? 'text-green-800'
-                      : isCurrent
-                      ? 'text-black'
-                      : 'text-gray-600'
-                  }`}>
+                  <p
+                    className={`font-medium ${
+                      isCompleted
+                        ? 'text-emerald-700'
+                        : isCurrent
+                          ? 'text-foreground'
+                          : 'text-muted-foreground'
+                    }`}
+                  >
                     {step.label}
-                    {isCurrent && status === 'extracting' && retryState.attempt > 1 && (
-                      <span className="text-sm font-normal ml-2">
-                        (Attempt {retryState.attempt}/{retryState.maxRetries})
-                      </span>
-                    )}
+                    {isCurrent &&
+                      status === 'extracting' &&
+                      retryState.attempt > 1 && (
+                        <span className="text-sm font-normal ml-2">
+                          (Attempt {retryState.attempt}/{retryState.maxRetries})
+                        </span>
+                      )}
                   </p>
-                  {isCurrent && status === 'extracting' && retryState.isRetrying && (
-                    <p className="text-sm text-orange-600 mt-1">
-                      Previous attempt failed, retrying in {retryCountdown}s...
-                    </p>
-                  )}
-                  {isCurrent && status === 'extracting' && !retryState.isRetrying && (
-                    <p className="text-sm text-gray-500 mt-1">
-                      {retryState.attempt > 1
-                        ? `Retrying extraction (attempt ${retryState.attempt})...`
-                        : 'Using AI to analyze the product...'
-                      }
-                    </p>
-                  )}
+                  {isCurrent &&
+                    status === 'extracting' &&
+                    retryState.isRetrying && (
+                      <p className="text-sm text-amber-600 mt-1">
+                        Previous attempt failed, retrying in {retryCountdown}
+                        s...
+                      </p>
+                    )}
+                  {isCurrent &&
+                    status === 'extracting' &&
+                    !retryState.isRetrying && (
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {retryState.attempt > 1
+                          ? `Retrying extraction (attempt ${retryState.attempt})...`
+                          : 'Using AI to analyze the product...'}
+                      </p>
+                    )}
                   {isCurrent && status === 'searching' && (
-                    <p className="text-sm text-gray-500 mt-1">Searching across multiple platforms...</p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Searching across multiple platforms...
+                    </p>
                   )}
                   {isCompleted && (
-                    <p className="text-sm text-green-600 mt-1">Completed successfully</p>
+                    <p className="text-sm text-emerald-600 mt-1">
+                      Completed successfully
+                    </p>
                   )}
                 </div>
-                {isCurrent && (
-                  <Spinner className="h-6 w-6" />
-                )}
+                {isCurrent && <Spinner className="h-6 w-6" />}
               </div>
             )
           })}
         </div>
 
         {/* Tips */}
-        <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-          <h3 className="font-medium mb-2" style={{ color: 'color(display-p3 0.14902 0.14902 0.14902)' }}>💡 Pro Tips</h3>
-          <ul className="text-sm text-gray-700 space-y-1">
+        <div className="mt-8 p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
+          <h3 className="font-medium mb-2 text-foreground flex items-center gap-2">
+            <Zap className="w-4 h-4 text-primary" strokeWidth={1.5} />
+            Pro Tips
+          </h3>
+          <ul className="text-sm text-muted-foreground space-y-1">
             <li>• We search Amazon, eBay, Walmart, Best Buy, and Target</li>
             <li>• Results are sorted by lowest price first</li>
             <li>• Click "Visit Store" to purchase directly</li>
@@ -516,9 +635,11 @@ export function SearchPage({ url, searchId }: SearchPageProps) {
         {/* Back Button */}
         <div className="mt-6 text-center">
           <Button
-            onClick={() => navigate({ to: '/$lang', params: { lang: params.lang || 'en' } })}
-            variant="link"
-            className="text-gray-500 hover:text-gray-700"
+            onClick={() =>
+              navigate({ to: '/$lang', params: { lang: params.lang || 'en' } })
+            }
+            variant="ghost"
+            className="text-muted-foreground hover:text-foreground"
           >
             ← Back to search
           </Button>

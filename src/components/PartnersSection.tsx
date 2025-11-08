@@ -37,9 +37,9 @@ export function PartnersSection({
             return (
               <div
                 key={partner.name}
-                className="group flex flex-col items-center justify-center p-6 bg-card/50 hover:bg-card rounded-xl border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                className="group flex flex-col items-center justify-center p-6 bg-white hover:bg-gray-50 rounded-xl border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
               >
-                <div className="w-16 h-16 rounded-full bg-linear-to-br from-primary/20 to-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-100 to-violet-100 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                   <IconComponent className="w-8 h-8 text-primary" strokeWidth={1.5} />
                 </div>
                 <span className="text-sm font-semibold text-center text-foreground">

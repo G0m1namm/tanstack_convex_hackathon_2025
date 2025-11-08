@@ -358,6 +358,42 @@ SENTRY_DSN=your-dsn
 - Analytics dashboard
 - API for developers
 
+## 📚 Documentation
+
+### Essential Guides
+- **[DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md)** - Complete design system reference
+  - Color palette & theme variables
+  - Icon system (Lucide React)
+  - Component patterns & styles
+  - Typography & layout standards
+  - Quick reference for dark theme
+
+- **[DEVELOPMENT_GUIDE.md](./DEVELOPMENT_GUIDE.md)** - Developer handbook
+  - Tech stack overview
+  - Project structure
+  - React 19 best practices
+  - Convex backend patterns
+  - TanStack Router usage
+  - Testing guidelines
+  - Deployment instructions
+
+- **[AGENTS.md](./AGENTS.md)** - AI agent workspace rules
+  - Project architecture principles
+  - Development workflow
+  - Code quality standards
+  - Technology-specific guidelines
+
+- **[FUTURE_FEATURES.md](./FUTURE_FEATURES.md)** - Roadmap and ideas
+  - Planned enhancements
+  - Feature wishlist
+  - Integration opportunities
+
+### Reference Components
+For implementation examples, see:
+- `src/components/SearchPage.tsx` - Loading states, progress indicators
+- `src/components/ComparisonPage.tsx` - Cards, badges, stat displays
+- `src/components/LandingPage.tsx` - Hero sections, platform cards
+
 ## 🤝 Contributing
 
 Built for the TanStack Start Hackathon 2025. Focus on demonstrating:

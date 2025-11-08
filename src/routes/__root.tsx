@@ -1,5 +1,6 @@
 import {
   HeadContent,
+  Link,
   Outlet,
   Scripts,
   createRootRouteWithContext,
@@ -8,8 +9,11 @@ import * as React from 'react'
 import * as Sentry from '@sentry/react'
 import type { QueryClient } from '@tanstack/react-query'
 import { I18nProvider } from '@lingui/react'
+import { AlertCircle } from 'lucide-react'
 import { i18n } from '~/i18n'
 import { Navigation } from '~/components/Navigation'
+import { Button } from '~/components/ui/button'
+import { Card, CardContent } from '~/components/ui/card'
 import appCss from '~/styles/app.css?url'
 
 Sentry.init({
@@ -57,7 +61,7 @@ export const Route = createRootRouteWithContext<{
       { rel: 'icon', href: '/favicon.ico' },
     ],
   }),
-  notFoundComponent: () => <div>Route not found</div>,
+  notFoundComponent: NotFound,
   component: RootComponent,
 })
 
@@ -83,5 +87,28 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
+  )
+}
+
+function NotFound() {
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+      <Card className="max-w-md w-full text-center border-border shadow-lg">
+        <CardContent className="pt-6 pb-6">
+          <div className="flex justify-center mb-4">
+            <AlertCircle className="w-16 h-16 text-primary" strokeWidth={1.5} />
+          </div>
+          <h2 className="text-2xl font-bold text-foreground mb-4">
+            Page Not Found
+          </h2>
+          <p className="text-muted-foreground mb-6">
+            The page you're looking for doesn't exist or has been moved.
+          </p>
+          <Button asChild className="bg-primary hover:bg-primary/90">
+            <Link to="/">Go Back Home</Link>
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

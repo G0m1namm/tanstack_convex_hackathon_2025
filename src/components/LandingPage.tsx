@@ -139,8 +139,8 @@ export function LandingPage() {
           sectionNumber="002"
         >
           <div className="grid md:grid-cols-3 gap-8 mt-16">
-            <div className="group p-8 rounded-xl border border-border/50 hover:border-primary/30 bg-card/50 hover:bg-card/80 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="w-20 h-20 bg-linear-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+            <div className="group p-8 rounded-xl border border-border hover:border-primary/50 bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="w-20 h-20 bg-gradient-to-br from-indigo-100 to-violet-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                 <Link2 className="w-10 h-10 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-semibold mb-3 text-foreground">
@@ -151,8 +151,8 @@ export function LandingPage() {
               </p>
             </div>
 
-            <div className="group p-8 rounded-xl border border-border/50 hover:border-primary/30 bg-card/50 hover:bg-card/80 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="w-20 h-20 bg-linear-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+            <div className="group p-8 rounded-xl border border-border hover:border-primary/50 bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="w-20 h-20 bg-gradient-to-br from-indigo-100 to-violet-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                 <Zap className="w-10 h-10 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-semibold mb-3 text-foreground">
@@ -163,8 +163,8 @@ export function LandingPage() {
               </p>
             </div>
 
-            <div className="group p-8 rounded-xl border border-border/50 hover:border-primary/30 bg-card/50 hover:bg-card/80 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="w-20 h-20 bg-linear-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+            <div className="group p-8 rounded-xl border border-border hover:border-primary/50 bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="w-20 h-20 bg-gradient-to-br from-indigo-100 to-violet-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                 <TrendingDown
                   className="w-10 h-10 text-primary"
                   strokeWidth={1.5}
@@ -181,7 +181,7 @@ export function LandingPage() {
         </Section>
 
         {/* Demo/Test Section [003] */}
-        <section className="bg-linear-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl border border-primary/20 p-12 mb-20">
+        <section className="bg-gradient-to-r from-indigo-50 via-violet-50 to-purple-50 rounded-2xl border border-indigo-200 p-12 mb-20">
           <div className="text-center">
             <p className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-widest">
               [003. Try It Now]
@@ -200,7 +200,7 @@ export function LandingPage() {
                 onClick={() => setUrl('https://www.amazon.com/dp/B08N5WRWNW')}
                 variant="outline"
                 size="sm"
-                className="px-6 py-2 rounded-lg hover:bg-primary/10 hover:border-primary transition-all"
+                className="px-6 py-2 rounded-lg hover:bg-indigo-100 hover:border-primary transition-all"
                 data-testid={LANDING_PAGE_TEST_IDS.SAMPLE_IPHONE_BUTTON}
               >
                 {<Trans id="landing.demo.sampleIphone" />}
@@ -211,7 +211,7 @@ export function LandingPage() {
                 }
                 variant="outline"
                 size="sm"
-                className="px-6 py-2 rounded-lg hover:bg-primary/10 hover:border-primary transition-all"
+                className="px-6 py-2 rounded-lg hover:bg-indigo-100 hover:border-primary transition-all"
                 data-testid={LANDING_PAGE_TEST_IDS.SAMPLE_HOME_ITEM_BUTTON}
               >
                 {<Trans id="landing.demo.sampleHomeItem" />}
@@ -222,7 +222,7 @@ export function LandingPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-card/50 border-t border-border/50 backdrop-blur-sm">
+      <footer className="bg-white border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex flex-col items-center space-y-4">
             <SocialLinks />

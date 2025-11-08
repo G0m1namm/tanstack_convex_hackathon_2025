@@ -9,26 +9,25 @@
   html,
   body {
     font-family: 'Inter', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    background-color: #181818; /* Passkeys dark background */
-    color: #e8e8e8; /* High contrast light text for dark theme */
+    background-color: #fafafa; /* Light background */
+    color: #0a0a0a; /* Dark text for light theme */
     font-size: 16px;
     line-height: 24px;
   }
 
-  /* Passkeys-inspired typography */
+  /* Modern typography */
   .hero-heading {
     font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
     font-weight: 500;
   }
 
-  /* Passkeys-style typography - minimal classes only */
+  /* Hero heading with indigo/purple gradient */
   .passkeys-h1 {
     font-size: 3rem;
     line-height: 1.2;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: #E3AFBE;
-    background: linear-gradient(135deg, #E3AFBE 0%, #f5d4e6 100%);
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -50,7 +49,7 @@
     font-size: 32px;
     font-weight: 600;
     line-height: 40px;
-    color: #e8e8e8;
+    color: #0a0a0a;
   }
 
   /* Smooth transitions */
@@ -103,71 +102,78 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #181818; /* Passkeys dark background */
-  --foreground: #e8e8e8; /* High contrast light text */
-  --card: #1a1a1a; /* Slightly lighter than background */
-  --card-foreground: #e8e8e8;
-  --popover: #1a1a1a;
-  --popover-foreground: #e8e8e8;
-  --primary: #E3AFBE; /* Passkeys pink */
-  --primary-foreground: #1a1a1a;
-  --secondary: #2a2a2a;
-  --secondary-foreground: #e8e8e8;
-  --muted: #2a2a2a;
-  --muted-foreground: #b8b8b8; /* Improved contrast from #888888 */
-  --accent: #2a2a2a;
-  --accent-foreground: #e8e8e8;
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: #3a3a3a;
-  --input: #2a2a2a;
-  --ring: #E3AFBE; /* Passkeys pink for focus rings */
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: #181818;
-  --sidebar-foreground: #e8e8e8;
-  --sidebar-primary: #E3AFBE;
-  --sidebar-primary-foreground: #1a1a1a;
-  --sidebar-accent: #2a2a2a;
-  --sidebar-accent-foreground: #e8e8e8;
-  --sidebar-border: #3a3a3a;
-  --sidebar-ring: #E3AFBE;
+  /* Light theme colors */
+  --background: #fafafa; /* Light gray background */
+  --foreground: #0a0a0a; /* Almost black text */
+  --card: #ffffff; /* White cards */
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  /* Indigo primary color (indigo-600) */
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  /* Light gray secondary */
+  --secondary: #f3f4f6;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280; /* Gray-500 for muted text */
+  --accent: #eef2ff; /* Indigo-50 for accents */
+  --accent-foreground: #4f46e5;
+  /* Error red that complements indigo/purple */
+  --destructive: #dc2626; /* Red-600 */
+  --border: #e5e7eb; /* Gray-200 */
+  --input: #f9fafb; /* Gray-50 */
+  --ring: #6366f1; /* Indigo-500 for focus rings */
+  /* Chart colors using purple/indigo palette */
+  --chart-1: #6366f1; /* Indigo-500 */
+  --chart-2: #8b5cf6; /* Violet-500 */
+  --chart-3: #a855f7; /* Purple-500 */
+  --chart-4: #d946ef; /* Fuchsia-500 */
+  --chart-5: #ec4899; /* Pink-500 */
+  /* Sidebar colors */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0a0a0a;
+  --sidebar-primary: #4f46e5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f3f4f6;
+  --sidebar-accent-foreground: #0a0a0a;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #6366f1;
 }
 
 .dark {
-  --background: #181818; /* Same as root for consistent dark theme */
-  --foreground: #e8e8e8; /* High contrast light text */
+  /* Dark theme variant (optional for future use) */
+  --background: #0f0f0f;
+  --foreground: #f5f5f5;
   --card: #1a1a1a;
-  --card-foreground: #e8e8e8;
+  --card-foreground: #f5f5f5;
   --popover: #1a1a1a;
-  --popover-foreground: #e8e8e8;
-  --primary: #E3AFBE; /* Passkeys pink */
-  --primary-foreground: #1a1a1a;
-  --secondary: #2a2a2a;
-  --secondary-foreground: #e8e8e8;
-  --muted: #2a2a2a;
-  --muted-foreground: #b8b8b8; /* Improved contrast */
-  --accent: #2a2a2a;
-  --accent-foreground: #e8e8e8;
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: #3a3a3a;
-  --input: #2a2a2a;
-  --ring: #E3AFBE;
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: #181818;
-  --sidebar-foreground: #e8e8e8;
-  --sidebar-primary: #E3AFBE;
-  --sidebar-primary-foreground: #1a1a1a;
-  --sidebar-accent: #2a2a2a;
-  --sidebar-accent-foreground: #e8e8e8;
-  --sidebar-border: #3a3a3a;
-  --sidebar-ring: #E3AFBE;
+  --popover-foreground: #f5f5f5;
+  --primary: #6366f1; /* Indigo-500 */
+  --primary-foreground: #ffffff;
+  --secondary: #262626;
+  --secondary-foreground: #f5f5f5;
+  --muted: #262626;
+  --muted-foreground: #a1a1aa; /* Zinc-400 */
+  --accent: #312e81; /* Indigo-900 for dark accents */
+  --accent-foreground: #c7d2fe; /* Indigo-200 */
+  --destructive: #ef4444; /* Red-500 */
+  --border: #3f3f46; /* Zinc-700 */
+  --input: #27272a; /* Zinc-800 */
+  --ring: #818cf8; /* Indigo-400 */
+  --chart-1: #818cf8; /* Indigo-400 */
+  --chart-2: #a78bfa; /* Violet-400 */
+  --chart-3: #c084fc; /* Purple-400 */
+  --chart-4: #e879f9; /* Fuchsia-400 */
+  --chart-5: #f472b6; /* Pink-400 */
+  --sidebar: #1a1a1a;
+  --sidebar-foreground: #f5f5f5;
+  --sidebar-primary: #6366f1;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #262626;
+  --sidebar-accent-foreground: #f5f5f5;
+  --sidebar-border: #3f3f46;
+  --sidebar-ring: #818cf8;
 }
 
 @layer base {
