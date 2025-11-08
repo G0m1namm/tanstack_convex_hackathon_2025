@@ -6,6 +6,7 @@ import { action } from './_generated/server'
 import type { ActionCtx } from './_generated/server'
 import type { Id } from './_generated/dataModel'
 import { api } from './_generated/api'
+import { safeOptionalString, safeOptionalNumber } from '../__tests__/test-helpers/firecrawlHelpers'
 
 // ===== FIRECRAWL ACTIONS (Node.js runtime) =====
 
@@ -144,11 +145,11 @@ const extractProductFromUrlHandler = async (
       description: extractedData.description || '',
       price: extractedData.price,
       currency: extractedData.currency,
-      originalPrice: extractedData.originalPrice || undefined, // Convert null to undefined for optional field
+      originalPrice: safeOptionalNumber(extractedData.originalPrice), // Safely handle null/undefined for optional field
       platform: extractedData.platform || detectPlatformFromUrl(args.url),
       imageUrl: extractedData.images?.[0], // Use first image
-      brand: extractedData.brand,
-      category: extractedData.category,
+      brand: safeOptionalString(extractedData.brand), // Safely handle null/undefined/empty strings
+      category: safeOptionalString(extractedData.category), // Safely handle null/undefined/empty strings
       availability: extractedData.availability ?? true,
       searchQuery: extractedData.name, // Use product name as search query for alternatives
     }
@@ -291,11 +292,11 @@ const searchSimilarProductsHandler = async (
           description: product.description,
           price: product.price,
           currency: product.currency,
-          originalPrice: product.originalPrice || undefined, // Convert null to undefined for optional field
+          originalPrice: safeOptionalNumber(product.originalPrice), // Safely handle null/undefined for optional field
           platform: product.platform,
           imageUrl: product.imageUrl,
-          brand: product.brand,
-          category: product.category,
+          brand: safeOptionalString(product.brand), // Safely handle null/undefined/empty strings
+          category: safeOptionalString(product.category), // Safely handle null/undefined/empty strings
           availability: product.availability,
           searchQuery: args.searchQuery,
         }) as Promise<Id<'products'>>,
