@@ -11,6 +11,38 @@ A full-stack web application built for the TanStack Start Hackathon that helps u
 - **Monitoring**: Sentry (error tracking)
 - **Styling**: Tailwind CSS
 
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js 22** (required for Convex Node.js actions)
+- **pnpm** package manager
+
+### Node.js Version Setup
+
+This project requires Node.js 22.13.1 for Convex's Node.js runtime support. The project includes an `.nvmrc` file and custom dev script that automatically switches to the correct version:
+
+```bash
+# Install Node.js 22 if not already installed
+nvm install 22.13.1
+nvm use 22.13.1
+
+# Verify version
+node --version  # Should show v22.13.1
+```
+
+### Installation
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development servers (automatically uses correct Node version)
+pnpm dev
+```
+
+The `dev.sh` script automatically loads nvm and switches to Node.js 22.13.1 before starting the development servers.
+
 ## 🚀 Core Features
 
 ### ✅ IMPLEMENTED (Current Status)

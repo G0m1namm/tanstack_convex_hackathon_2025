@@ -143,6 +143,16 @@
 - **Bundle Splitting**: Use dynamic imports for code splitting
 - **Dev Server**: Configure warmup for frequently used files
 
+### Vitest (Testing Framework)
+- **Test Location**: Place tests in `__tests__/` directory with `.test.ts` or `.test.tsx` extensions
+- **Test Helpers**: Place reusable test helper functions in `__tests__/test-helpers/` directory
+- **Mocking**: Use `vi.mock()` and `vi.fn()` for mocking (not `jest.mock` or `jest.fn()`)
+- **React Component Testing**: Use `@testing-library/react` with jsdom environment for component tests
+- **Data-TestId Attributes**: Add `data-testid` attributes to important interactive elements using constants from `src/constants/constants.ts`
+- **Configuration**: Tests configured in `vitest.config.ts` with globals enabled
+- **Setup**: Global test setup in `__tests__/setup.ts`
+- **Coverage**: Focus on critical business logic testing rather than 100% coverage
+
 ## Useful Commands
 
 ### Development
@@ -171,8 +181,10 @@ npx convex dev --reset
 
 ### Testing
 ```bash
-# Run tests (when implemented)
-pnpm test
+# Run tests with Vitest
+pnpm test         # Watch mode
+pnpm test:run     # Single run
+pnpm test:ui      # Open Vitest UI
 
 # Test specific functionality
 npx convex run <function_name> --args '{"key": "value"}'

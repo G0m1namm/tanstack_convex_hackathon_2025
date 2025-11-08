@@ -59,10 +59,12 @@ You are working on **DealFinder**, an AI-powered price comparison platform that 
 4. **Utilities**: Create in `src/` with descriptive names
 
 ### Testing Approach
-1. **Manual Testing**: Test in browser with Convex dev server running
-2. **API Testing**: Use Convex dashboard to test functions directly
-3. **UI Testing**: Test responsive design across different screen sizes
-4. **Error Scenarios**: Test with invalid URLs, network failures, etc.
+1. **Unit Testing**: Use Vitest for unit tests of utility functions and components
+2. **Integration Testing**: Test component interactions and API calls
+3. **Manual Testing**: Test in browser with Convex dev server running
+4. **API Testing**: Use Convex dashboard to test functions directly
+5. **UI Testing**: Test responsive design across different screen sizes
+6. **Error Scenarios**: Test with invalid URLs, network failures, etc.
 
 ### Common Patterns
 - **Data Fetching**: Use `useSuspenseQuery` from `@tanstack/react-query`
@@ -177,5 +179,15 @@ You are working on **DealFinder**, an AI-powered price comparison platform that 
 - Configure warmup for frequently used files
 - Optimize plugins for performance
 - Use appropriate asset handling
+
+### Vitest Testing Framework
+- **Test Structure**: Place tests in `__tests__/` directory with `.test.ts` or `.test.tsx` extensions
+- **Test Helpers**: Place reusable test helper functions in `__tests__/test-helpers/` directory
+- **Mocking**: Use `vi.mock()` and `vi.fn()` for mocking dependencies
+- **React Testing**: Use `@testing-library/react` for component testing with jsdom environment
+- **Data-TestId Attributes**: Add `data-testid` attributes to important interactive elements using constants from `src/constants/constants.ts`
+- **Test Configuration**: Tests run with globals enabled in `vitest.config.ts`
+- **Setup Files**: Global test setup in `__tests__/setup.ts`
+- **Test Commands**: `pnpm test` (watch mode), `pnpm test:run` (single run), `pnpm test:ui` (UI mode)
 
 Remember: This is a hackathon project. Focus on delivering working features quickly while maintaining code quality. Speed and innovation are important, but so is maintainable code.
