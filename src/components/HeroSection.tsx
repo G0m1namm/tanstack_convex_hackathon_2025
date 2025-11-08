@@ -6,28 +6,37 @@ interface HeroSectionProps {
   subtitle: ReactNode
   children?: ReactNode
   className?: string
+  sectionNumber?: string
 }
 
 export function HeroSection({
   title,
   subtitle,
   children,
-  className = ''
+  className = '',
+  sectionNumber
 }: HeroSectionProps) {
   return (
-    <section className={`hero-section py-24 ${className}`}>
+    <section className={`hero-section ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <div className="text-center relative z-10">
+          {/* Section Number */}
+          {sectionNumber && (
+            <p className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-widest">
+              [{sectionNumber}]
+            </p>
+          )}
+
           {/* Main Heading with Passkeys-style Typography */}
           <h1
-            className="passkeys-h1 mb-6 leading-tight"
+            className="passkeys-h1 mb-8 leading-tight"
             data-testid={LANDING_PAGE_TEST_IDS.MAIN_HEADING}
           >
             {title}
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
             {subtitle}
           </p>
 

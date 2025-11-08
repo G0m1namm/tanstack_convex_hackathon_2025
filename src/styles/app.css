@@ -10,7 +10,7 @@
   body {
     font-family: 'Inter', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     background-color: #181818; /* Passkeys dark background */
-    color: #000000; /* Passkeys text color */
+    color: #e8e8e8; /* High contrast light text for dark theme */
     font-size: 16px;
     line-height: 24px;
   }
@@ -23,17 +23,39 @@
 
   /* Passkeys-style typography - minimal classes only */
   .passkeys-h1 {
-    font-size: 88px;
-    font-weight: 700;
-    line-height: 70.4px;
+    font-size: 3rem;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.02em;
     color: #E3AFBE;
+    background: linear-gradient(135deg, #E3AFBE 0%, #f5d4e6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @media (min-width: 768px) {
+    .passkeys-h1 {
+      font-size: 5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .passkeys-h1 {
+      font-size: 5.5rem;
+    }
   }
 
   .passkeys-h3 {
     font-size: 32px;
-    font-weight: 500;
-    line-height: 35.2px;
-    color: #000000;
+    font-weight: 600;
+    line-height: 40px;
+    color: #e8e8e8;
+  }
+
+  /* Smooth transitions */
+  * {
+    @apply transition-colors duration-200;
   }
 
   .using-mouse * {
@@ -82,21 +104,21 @@
 :root {
   --radius: 0.625rem;
   --background: #181818; /* Passkeys dark background */
-  --foreground: #000000; /* Passkeys text color */
+  --foreground: #e8e8e8; /* High contrast light text */
   --card: #1a1a1a; /* Slightly lighter than background */
-  --card-foreground: #000000;
+  --card-foreground: #e8e8e8;
   --popover: #1a1a1a;
-  --popover-foreground: #000000;
+  --popover-foreground: #e8e8e8;
   --primary: #E3AFBE; /* Passkeys pink */
-  --primary-foreground: #000000;
+  --primary-foreground: #1a1a1a;
   --secondary: #2a2a2a;
-  --secondary-foreground: #000000;
+  --secondary-foreground: #e8e8e8;
   --muted: #2a2a2a;
-  --muted-foreground: #888888;
+  --muted-foreground: #b8b8b8; /* Improved contrast from #888888 */
   --accent: #2a2a2a;
-  --accent-foreground: #000000;
+  --accent-foreground: #e8e8e8;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #333333;
+  --border: #3a3a3a;
   --input: #2a2a2a;
   --ring: #E3AFBE; /* Passkeys pink for focus rings */
   --chart-1: oklch(0.646 0.222 41.116);
@@ -105,32 +127,32 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: #181818;
-  --sidebar-foreground: #000000;
+  --sidebar-foreground: #e8e8e8;
   --sidebar-primary: #E3AFBE;
-  --sidebar-primary-foreground: #000000;
+  --sidebar-primary-foreground: #1a1a1a;
   --sidebar-accent: #2a2a2a;
-  --sidebar-accent-foreground: #000000;
-  --sidebar-border: #333333;
+  --sidebar-accent-foreground: #e8e8e8;
+  --sidebar-border: #3a3a3a;
   --sidebar-ring: #E3AFBE;
 }
 
 .dark {
   --background: #181818; /* Same as root for consistent dark theme */
-  --foreground: #000000;
+  --foreground: #e8e8e8; /* High contrast light text */
   --card: #1a1a1a;
-  --card-foreground: #000000;
+  --card-foreground: #e8e8e8;
   --popover: #1a1a1a;
-  --popover-foreground: #000000;
+  --popover-foreground: #e8e8e8;
   --primary: #E3AFBE; /* Passkeys pink */
-  --primary-foreground: #000000;
+  --primary-foreground: #1a1a1a;
   --secondary: #2a2a2a;
-  --secondary-foreground: #000000;
+  --secondary-foreground: #e8e8e8;
   --muted: #2a2a2a;
-  --muted-foreground: #888888;
+  --muted-foreground: #b8b8b8; /* Improved contrast */
   --accent: #2a2a2a;
-  --accent-foreground: #000000;
+  --accent-foreground: #e8e8e8;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: #333333;
+  --border: #3a3a3a;
   --input: #2a2a2a;
   --ring: #E3AFBE;
   --chart-1: oklch(0.488 0.243 264.376);
@@ -139,12 +161,12 @@
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: #181818;
-  --sidebar-foreground: #000000;
+  --sidebar-foreground: #e8e8e8;
   --sidebar-primary: #E3AFBE;
-  --sidebar-primary-foreground: #000000;
+  --sidebar-primary-foreground: #1a1a1a;
   --sidebar-accent: #2a2a2a;
-  --sidebar-accent-foreground: #000000;
-  --sidebar-border: #333333;
+  --sidebar-accent-foreground: #e8e8e8;
+  --sidebar-border: #3a3a3a;
   --sidebar-ring: #E3AFBE;
 }
 

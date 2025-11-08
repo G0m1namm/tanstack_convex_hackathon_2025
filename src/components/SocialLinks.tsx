@@ -38,14 +38,14 @@ export function SocialLinks({
 }: SocialLinksProps) {
 
   return (
-    <div className={`flex space-x-4 ${className}`}>
+    <div className={`flex space-x-5 ${className}`}>
       {links.map((link) => (
         <a
           key={link.name}
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-400 hover:text-gray-900 transition-colors duration-200 text-lg"
+          className="text-muted-foreground hover:text-primary transition-colors duration-300 text-xl hover:scale-110 transform"
           aria-label={link.name}
         >
           {link.icon}
